@@ -1,0 +1,12 @@
+<Parts>
+	<Size>8.75</Size>
+	<Forces>0.175</Forces>
+	<Forces_X>0.585</Forces_X>
+	<Forces_Y>0.48</Forces_Y>
+	<Pulse>16.5</Pulse>
+	<Life>3.1</Life>
+	<Eternal>0</Eternal>
+<Parts/>
+<ForcesX>0.165</ForcesX>
+	<ForcesY>0.15</ForcesY>
+</Parts>
