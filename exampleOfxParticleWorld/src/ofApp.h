@@ -27,6 +27,7 @@ class ofApp : public ofBaseApp{
     
     ofxPanel         panel;
     ofParameterGroup group;
+    ofxLabel         fps;
     
 
     

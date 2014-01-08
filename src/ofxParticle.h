@@ -2,12 +2,7 @@
 #include "ofMain.h"
 
 #include "ofxAttractor.h"
-
-enum partAttractorMode{
-	PARTICLE_ATTRACTOR_MODE_ATTRACT = 0,
-	PARTICLE_ATTRACTOR_MODE_REPEL,
-	PARTICLE_ATTRACTOR_MODE_NOISE
-};
+#include "ofxParticleWorldDefine.h"
 
 class ofxParticle{
 
@@ -17,7 +12,7 @@ class ofxParticle{
 		void setMode(partAttractorMode newMode);
 		void setAttractPoints( vector <ofxAttractor> * attract );
 
-		void reset();
+		void reset(ofVec3f _originVel);
 		void update(ofParameterGroup _settings);
 		void draw();		
 		

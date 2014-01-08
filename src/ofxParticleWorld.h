@@ -5,6 +5,8 @@
 #include "ofxAttractor.h"
 #include "ofxEmitter.h"
 
+
+
 class ofxParticleWorld{
 
 	public:
@@ -42,12 +44,19 @@ public:
     ofParameterGroup     m_pgPartsSettings;
 private:
     ofParameter<float>   m_pxSize;
+    ofParameter<float>   m_pxRateSize;
+    
     ofParameter<float>   m_pxCoefForces;
+    ofParameter<float>   m_pxCoefForcesMin;
     ofParameter<float>   m_pxCoefForces_X;
     ofParameter<float>   m_pxCoefForces_Y;
     ofParameter<float>   m_pxPulse;
+    ofParameter<float>   m_pxDrag;
+    ofParameter<float>   m_pxDistMin;
+    ofParameter<float>   m_pxDistMax;
+    ofParameter<float>   m_pxVelMax;
+    
     ofParameter<float>   m_pxLifeBase;
-    ofParameter<float>   m_pxFriction;
     ofParameter<bool>    m_pxEternalLife;
 		
 };

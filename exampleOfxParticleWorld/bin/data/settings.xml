@@ -1,12 +1,19 @@
-<Parts>
-	<Size>8.75</Size>
-	<Forces>0.175</Forces>
-	<Forces_X>0.585</Forces_X>
-	<Forces_Y>0.48</Forces_Y>
-	<Pulse>16.5</Pulse>
-	<Life>3.1</Life>
-	<Eternal>0</Eternal>
-<Parts/>
-<ForcesX>0.165</ForcesX>
-	<ForcesY>0.15</ForcesY>
-</Parts>
+<group>
+	<Parts_settings>
+		<Size>1.29082</Size>
+		<Forces>0.622449</Forces>
+		<ForceX>1</ForceX>
+		<ForceY>1</ForceY>
+		<Pulse>3.85204</Pulse>
+		<Life>0</Life>
+		<Friction>0</Friction>
+		<IsEternal>0</IsEternal>
+	<RateSize>0.336735</RateSize>
+		<ForcesMin>1</ForcesMin>
+	<Drag>1</Drag>
+	<ForceDistanceMin>40</ForceDistanceMin>
+		<ForceDistanceMax>300</ForceDistanceMax>
+		<VelMax>30.102</VelMax>
+	</Parts_settings>
+<group/>
+</group>

@@ -16,16 +16,18 @@ void ofxParticle::setAttractPoints( vector <ofxAttractor> * attract ){
 }
 
 //------------------------------------------------------------------
-void ofxParticle::reset(){
+void ofxParticle::reset(ofVec3f _originVel){
 	//the unique val allows us to set properties slightly differently for each particle
 	uniqueVal = ofRandom(-10000, 10000);
 	
 	pos.x = ofRandomWidth();
 	pos.y = ofRandomHeight();
-	
+	/*
 	vel.x = ofRandom(-3.9, 3.9);
 	vel.y = ofRandom(-3.9, 3.9);
-	
+	*/
+    vel = _originVel;
+    
 	frc   = ofPoint(0,0,0);
 	
 	scale = ofRandom(0.5, 1.0);
@@ -45,38 +47,15 @@ void ofxParticle::reset(){
 void ofxParticle::update(ofParameterGroup _settings){
     
     // 0 - Set the settings
-    scale = _settings.get("Size").cast<float>();
+    scale = _settings.get(cpxSize).cast<float>() * _settings.get(cpxRateSize).cast<float>();
 
-	//1 - APPLY THE FORCES BASED ON WHICH MODE WE ARE IN 
-	/*
-	if( mode == PARTICLE_MODE_ATTRACT ){
-		ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
-		frc = attractPt-pos; // we get the attraction force/vector by looking at the mouse pos relative to our pos
-		frc.normalize(); //by normalizing we disregard how close the particle is to the attraction point 
-		
-		vel *= drag; //apply drag
-		vel += frc * 0.6; //apply force
-	}
-	else if( mode == PARTICLE_MODE_REPEL ){
-		ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
-		frc = attractPt-pos; 
-		
-		//let get the distance and only repel points close to the mouse
-		float dist = frc.length();
-		frc.normalize(); 
-		
-		vel *= drag; 
-		if( dist < 150 ){
-			vel += -frc * 0.6; //notice the frc is negative 
-		}else{
-			//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy. 			
-			frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
-			frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
-			vel += frc * 0.04;
-		}
-	}
-	else if( mode == PARTICLE_MODE_NOISE ){
-        */
+    float forceCoef = _settings.get(cpxCoefForces).cast<float>();
+    float forceCoefMin = _settings.get(cpxCoefForcesMin).cast<float>();
+    
+    float localDrag = drag*_settings.get(cpxDrag).cast<float>();
+    
+
+	//1 - APPLY THE FORCES BASED ON WHICH MODE WE ARE IN
     if( mode == PARTICLE_ATTRACTOR_MODE_NOISE){
 		//lets simulate falling snow 
 		//the fake wind is meant to add a shift to the particles based on where in x they are
@@ -86,8 +65,8 @@ void ofxParticle::update(ofParameterGroup _settings){
 		frc.x = fakeWindX * 0.25 + ofSignedNoise(uniqueVal, pos.y * 0.04) * 0.6;
 		frc.y = ofSignedNoise(uniqueVal, pos.x * 0.006, ofGetElapsedTimef()*0.2) * 0.09 + 0.18;
 
-		vel *= drag; 
-		vel += frc * 0.4;
+		vel *= localDrag; 
+		vel += frc * forceCoef;
 		
 		//we do this so as to skip the bounds check for the bottom and make the particles go back to the top of the screen
 		if( pos.y + vel.y > ofGetHeight() ){
@@ -118,17 +97,18 @@ void ofxParticle::update(ofParameterGroup _settings){
 				
 				//in this case we don't normalize as we want to have the force proportional to distance 
 				frc = closestAttractor.getPos() - pos;
-		
-				vel *= drag;
+                
+                vel *= localDrag;
 				 
-				//lets also limit our attraction to a certain distance and don't apply if 'f' key is pressed
-				if( dist < 300 && dist > 40){
-					vel += frc * 0.003;
+				//lets also limit our attraction to a certain distance
+				if( dist < _settings.get(cpxDistMax).cast<float>() && dist > _settings.get(cpxDistMin).cast<float>()){
+					vel += frc * forceCoefMin;
 				}else{
 					//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy. 			
 					frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
 					frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
-					vel += frc * 0.4;
+                    
+                    vel += frc * forceCoef;
 				}
 				
 			}
@@ -139,24 +119,7 @@ void ofxParticle::update(ofParameterGroup _settings){
 	else if( mode == PARTICLE_ATTRACTOR_MODE_REPEL){
 		
 		if( attractPoints ){
-            /*
-            ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
-            frc = attractPt-pos;
-            
-            //let get the distance and only repel points close to the mouse
-            float dist = frc.length();
-            frc.normalize();
-            
-            vel *= drag;
-            if( dist < 150 ){
-                vel += -frc * 0.6; //notice the frc is negative
-            }else{
-                //if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy.
-                frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
-                frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
-                vel += frc * 0.04;
-            }
-            */
+
 			//1 - find closest attractPoint
 			ofxAttractor closestAttractor;
 			int closest = -1;
@@ -172,24 +135,23 @@ void ofxParticle::update(ofParameterGroup _settings){
             
 			//2 - if we have a closest point - lets calcuate the force towards it
 			if( closest != -1 ){
-                
-                ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
-                attractPt = attractPoints->at(closest).getPos();
+				closestAttractor = attractPoints->at(closest);
+				float dist = sqrt(closestDist);
 				
-                frc = attractPt-pos;
-                
-                //let get the distance and only repel points close to the mouse
-                float dist = frc.length();
+                frc = closestAttractor.getPos()-pos;
                 frc.normalize();
                 
-                vel *= drag;
-                if( dist < 150 ){
-                    vel += -frc * 0.6; //notice the frc is negative
+                //let get the distance and only repel points close to the mouse
+                vel *= localDrag;
+                
+                if( dist < _settings.get(cpxDistMax).cast<float>()){
+                    vel += -frc * forceCoef; //notice the frc is negative
                 }else{
                     //if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy.
-                    frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
-                    frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
-                    vel += frc * 0.04;
+					frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
+					frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
+                    
+                    vel += frc * forceCoefMin;
                 }
 
 			}
@@ -201,7 +163,10 @@ void ofxParticle::update(ofParameterGroup _settings){
 
 	
 	//2 - UPDATE OUR POSITION
-	
+	vel.x *= _settings.get(cpxCoefForces_X).cast<float>();
+    vel.y *= _settings.get(cpxCoefForces_Y).cast<float>();
+    vel.limit(_settings.get(cpxVelMax).cast<float>());
+    
 	pos += vel; 
 	
 	

@@ -2,12 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    ofSetFrameRate(60);
+    
     m_oWorld.setup();
     
-    group.setName("Parameters");
+    //group.setName("Parts Parameters");
     group.add(m_oWorld.m_pgPartsSettings);
     panel.setup(group);
-    panel.ofxBaseGui::setPosition(10, 100);
+    panel.add(fps.setup("FPS", ""));
+    panel.setPosition(10, 100);
+    panel.loadFromFile("Settings.xml");
     
     m_oWorld.currentMode = PARTICLE_ATTRACTOR_MODE_ATTRACT;
     currentModeStr = "1 - PARTICLE_ATTRACTOR_MODE_ATTRACT: attracts to mouse";
@@ -18,6 +23,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     m_oWorld.update();
+    fps = ofToString(ofGetFrameRate());
 }
 
 //--------------------------------------------------------------
