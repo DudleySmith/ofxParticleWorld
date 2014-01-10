@@ -29,6 +29,11 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		EA3C87A4187FF6350033D12E /* ofxBasicColorSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C879B187FF6350033D12E /* ofxBasicColorSet.cpp */; };
+		EA3C87A5187FF6350033D12E /* ofxColorSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C879D187FF6350033D12E /* ofxColorSet.cpp */; };
+		EA3C87A6187FF6350033D12E /* ofxColorSetAnimated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */; };
+		EA3C87AD187FF6C60033D12E /* ofdTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */; };
+		EA3C87B0188004490033D12E /* ofxColorSetUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */; };
 		EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */; };
 		EA7B6BC5187B6114000F6D9C /* ofxEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC3187B6114000F6D9C /* ofxEmitter.cpp */; };
 		EA7B6BD9187B66F3000F6D9C /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC8187B66F3000F6D9C /* ofxBaseGui.cpp */; };
@@ -99,6 +104,18 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		EA3C8785187FF6350033D12E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		EA3C8799187FF6350033D12E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		EA3C879B187FF6350033D12E /* ofxBasicColorSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBasicColorSet.cpp; sourceTree = "<group>"; };
+		EA3C879C187FF6350033D12E /* ofxBasicColorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBasicColorSet.h; sourceTree = "<group>"; };
+		EA3C879D187FF6350033D12E /* ofxColorSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSet.cpp; sourceTree = "<group>"; };
+		EA3C879E187FF6350033D12E /* ofxColorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSet.h; sourceTree = "<group>"; };
+		EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSetAnimated.cpp; sourceTree = "<group>"; };
+		EA3C87A0187FF6350033D12E /* ofxColorSetAnimated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSetAnimated.h; sourceTree = "<group>"; };
+		EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofdTimer.cpp; sourceTree = "<group>"; };
+		EA3C87AC187FF6C60033D12E /* ofdTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofdTimer.h; sourceTree = "<group>"; };
+		EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSetUI.cpp; sourceTree = "<group>"; };
+		EA3C87AF188004490033D12E /* ofxColorSetUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSetUI.h; sourceTree = "<group>"; };
 		EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxAttractor.cpp; path = ../src/ofxAttractor.cpp; sourceTree = "<group>"; };
 		EA7B6BC1187B582C000F6D9C /* ofxAttractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxAttractor.h; path = ../src/ofxAttractor.h; sourceTree = "<group>"; };
 		EA7B6BC3187B6114000F6D9C /* ofxEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxEmitter.cpp; path = ../src/ofxEmitter.cpp; sourceTree = "<group>"; };
@@ -179,6 +196,8 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				EA3C87AA187FF6C60033D12E /* ofdTimer */,
+				EA3C8784187FF6350033D12E /* ofxColorSet */,
 				EA7B6BC6187B66F3000F6D9C /* ofxGui */,
 				2D680FEF0CB631DBBEA0EA6D /* ofxParticleWorld */,
 			);
@@ -262,6 +281,42 @@
 				E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */,
 			);
 			name = openFrameworks;
+			sourceTree = "<group>";
+		};
+		EA3C8784187FF6350033D12E /* ofxColorSet */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C8785187FF6350033D12E /* .gitignore */,
+				EA3C8799187FF6350033D12E /* README.md */,
+				EA3C879A187FF6350033D12E /* src */,
+			);
+			name = ofxColorSet;
+			path = ../../ofxColorSet;
+			sourceTree = "<group>";
+		};
+		EA3C879A187FF6350033D12E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */,
+				EA3C87AF188004490033D12E /* ofxColorSetUI.h */,
+				EA3C879B187FF6350033D12E /* ofxBasicColorSet.cpp */,
+				EA3C879C187FF6350033D12E /* ofxBasicColorSet.h */,
+				EA3C879D187FF6350033D12E /* ofxColorSet.cpp */,
+				EA3C879E187FF6350033D12E /* ofxColorSet.h */,
+				EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */,
+				EA3C87A0187FF6350033D12E /* ofxColorSetAnimated.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		EA3C87AA187FF6C60033D12E /* ofdTimer */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */,
+				EA3C87AC187FF6C60033D12E /* ofdTimer.h */,
+			);
+			name = ofdTimer;
+			path = ../../ofdTimer;
 			sourceTree = "<group>";
 		};
 		EA7B6BC6187B66F3000F6D9C /* ofxGui */ = {
@@ -386,17 +441,22 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				EA7B6BE0187B66F3000F6D9C /* ofxToggle.cpp in Sources */,
+				EA3C87A6187FF6350033D12E /* ofxColorSetAnimated.cpp in Sources */,
 				EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */,
 				EA7B6BDC187B66F3000F6D9C /* ofxLabel.cpp in Sources */,
 				EA7B6BDF187B66F3000F6D9C /* ofxSliderGroup.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				31E0CEF024E614667837F4D9 /* ofxParticle.cpp in Sources */,
 				EA7B6BDD187B66F3000F6D9C /* ofxPanel.cpp in Sources */,
+				EA3C87A4187FF6350033D12E /* ofxBasicColorSet.cpp in Sources */,
 				EA7B6BDB187B66F3000F6D9C /* ofxGuiGroup.cpp in Sources */,
+				EA3C87AD187FF6C60033D12E /* ofdTimer.cpp in Sources */,
+				EA3C87B0188004490033D12E /* ofxColorSetUI.cpp in Sources */,
 				EA7B6BC5187B6114000F6D9C /* ofxEmitter.cpp in Sources */,
 				EA7B6BD9187B66F3000F6D9C /* ofxBaseGui.cpp in Sources */,
 				486E5F3CFFFD56F8A14F58F7 /* ofxParticleWorld.cpp in Sources */,
 				EA7B6BDE187B66F3000F6D9C /* ofxSlider.cpp in Sources */,
+				EA3C87A5187FF6350033D12E /* ofxColorSet.cpp in Sources */,
 				EA7B6BDA187B66F3000F6D9C /* ofxButton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

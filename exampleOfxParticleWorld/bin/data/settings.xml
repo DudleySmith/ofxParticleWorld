@@ -1,6 +1,6 @@
 <group>
 	<Parts_settings>
-		<Size>1.29082</Size>
+		<Size>9.04592</Size>
 		<Forces>0.622449</Forces>
 		<ForceX>1</ForceX>
 		<ForceY>1</ForceY>
@@ -9,11 +9,14 @@
 		<Friction>0</Friction>
 		<IsEternal>0</IsEternal>
 	<RateSize>0.336735</RateSize>
-		<ForcesMin>1</ForcesMin>
-	<Drag>1</Drag>
-	<ForceDistanceMin>40</ForceDistanceMin>
-		<ForceDistanceMax>300</ForceDistanceMax>
+		<ForcesMin>0.1</ForcesMin>
+	<Drag>0.897959</Drag>
+	<ForceDistanceMin>150.51</ForceDistanceMin>
+		<ForceDistanceMax>500</ForceDistanceMax>
 		<VelMax>30.102</VelMax>
+	<RenderMode>11</RenderMode>
+		<AttractMode>0</AttractMode>
 	</Parts_settings>
 <group/>
+<FPS>18.6467</FPS>
 </group>

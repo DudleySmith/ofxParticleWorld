@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxParticleWorld.h"
 #include "ofxGui.h"
+#include "ofxColorSet.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,10 +26,16 @@ class ofApp : public ofBaseApp{
     ofxParticleWorld m_oWorld;
     string          currentModeStr;
     
-    ofxPanel         panel;
-    ofParameterGroup group;
+    ofxPanel         uiParts;
+    ofParameterGroup gpParts;
+    
+    ofxPanel         uiColors;
+    ofParameterGroup gpColors;
+    ofxButton        btReload;
+    
     ofxLabel         fps;
     
-
+    ofxColorSet      m_oColorSet;
+    
     
 };

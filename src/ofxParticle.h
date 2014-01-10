@@ -6,28 +6,29 @@
 
 class ofxParticle{
 
-	public:
-		ofxParticle();
+public:
+    ofxParticle();
 		
-		void setMode(partAttractorMode newMode);
-		void setAttractPoints( vector <ofxAttractor> * attract );
-
-		void reset(ofVec3f _originVel);
-		void update(ofParameterGroup _settings);
-		void draw();		
+    void setAttractPoints( vector <ofxAttractor> * attract );
+    void setColor(ofColor _color){m_oColor = _color;};
 		
-		ofPoint pos;
-		ofPoint vel;
-		ofPoint frc;
+    void reset(ofVec3f _originVel);
+    void update(ofParameterGroup _settings);
+    void draw();
 		
-		float drag; 
-		float uniqueVal;
-		float scale;
-		
-		partAttractorMode mode;
-		
-		vector <ofxAttractor> * attractPoints;
+    ofPoint pos;
+    ofPoint vel;
+    ofPoint frc;
     
-        ofColor m_oColor;
+    float drag;
+    float uniqueVal;
+    float scale;
+		
+    partAttractorMode    m_eAttractMode;
+    partRenderMode       m_eRenderMode;
+	
+    vector <ofxAttractor> * attractPoints;
+    
+    ofColor m_oColor;
     
 };

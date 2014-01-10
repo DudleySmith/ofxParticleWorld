@@ -5,23 +5,39 @@ void ofApp::setup(){
     
     ofSetFrameRate(60);
     
-    m_oWorld.setup();
+    m_oWorld.setup(m_oColorSet);
+    m_oColorSet.setup("ColorSets.xml");
     
-    //group.setName("Parts Parameters");
-    group.add(m_oWorld.m_pgPartsSettings);
-    panel.setup(group);
-    panel.add(fps.setup("FPS", ""));
-    panel.setPosition(10, 100);
-    panel.loadFromFile("Settings.xml");
+    // Parts UI --------------------------------------------------------------
+    gpParts.add(m_oWorld.m_pgSets);
+    uiParts.setup(gpParts);
+    uiParts.add(fps.setup("FPS", ""));
+    uiParts.setPosition(10, 100);
+    uiParts.loadFromFile("Settings.xml");
     
-    m_oWorld.currentMode = PARTICLE_ATTRACTOR_MODE_ATTRACT;
-    currentModeStr = "1 - PARTICLE_ATTRACTOR_MODE_ATTRACT: attracts to mouse";
-    
+    // Colors UI --------------------------------------------------------------
+    gpColors.add(m_oColorSet.m_oUI.m_gGroup);
+    uiColors.setup(gpColors);
+    uiColors.add(btReload.setup("Reload"));
+    uiColors.setPosition(250, 100);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_ATTRACT){
+        currentModeStr = "1 - PATTRACTOR_ATTRACT: attracts";
+	}
+	if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_REPEL){
+		currentModeStr = "2 - PATTRACTOR_REPEL: repels";
+	}
+	if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_NOISE){
+		currentModeStr = "3 - PATTRACTOR_NOISE: windy";
+	}
+    
+    m_oColorSet.update(btReload);
+    
     m_oWorld.update();
     fps = ofToString(ofGetFrameRate());
 }
@@ -33,28 +49,17 @@ void ofApp::draw(){
     m_oWorld.drawAttractors();
     m_oWorld.drawEmitters();
     
-    panel.draw();
+    uiParts.draw();
+    uiColors.draw();
     
     ofSetColor(230);
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset.", 10, 20);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if( key == '1'){
-		m_oWorld.currentMode = PARTICLE_ATTRACTOR_MODE_ATTRACT;
-		currentModeStr = "1 - PARTICLE_ATTRACTOR_MODE_ATTRACT: attracts to mouse";
-	}
-	if( key == '2'){
-		m_oWorld.currentMode = PARTICLE_ATTRACTOR_MODE_REPEL;
-		currentModeStr = "2 - PARTICLE_ATTRACTOR_MODE_REPEL: repels from nearest point";
-	}
-	if( key == '3'){
-		m_oWorld.currentMode = PARTICLE_ATTRACTOR_MODE_NOISE;
-		currentModeStr = "3 - PARTICLE_ATTRACTOR_MODE_NOISE: snow particle simulation";
-		m_oWorld.resetParticles();
-	}
+
     
 	if( key == ' ' ){
 		m_oWorld.resetParticles();

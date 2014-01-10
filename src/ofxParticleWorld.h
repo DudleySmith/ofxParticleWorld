@@ -4,45 +4,48 @@
 #include "ofxParticle.h"
 #include "ofxAttractor.h"
 #include "ofxEmitter.h"
+#include "ofxColorSet.h"
 
 
 
 class ofxParticleWorld{
 
-	public:
-		void setup();
-        void loadSettings();
-		void update();
-        void drawParticles();
-        void drawAttractors();
-        void drawEmitters();
-        void resetParticles();
+public:
+    void setup(ofxColorSet &_colorSet);
+    void loadSettings();
+    void update();
+    void drawParticles();
+    void drawAttractors();
+    void drawEmitters();
+    void resetParticles();
     
-        void addAttractPoints(string _name, ofPoint _pos);
+    void addAttractPoints(string _name, ofPoint _pos);
     
-        /*
-		void keyPressed  (int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-		*/
+    /*
+    void keyPressed  (int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+    */
     
-		partAttractorMode    currentMode;
-		
-		vector <ofxParticle> p;
-    
+    vector <ofxParticle>    m_aParts;
     vector <ofxAttractor>   m_aAttractors;
     vector <ofxEmitter>     m_aEmitters;
-    //vector <ofxAttractor> attractPointsWithMovement;
+    
+    ofxColorSet             *m_pColorSet;
     
 public:
-    ofParameterGroup     m_pgPartsSettings;
+    ofParameterGroup     m_pgSets;
+    
 private:
+    ofParameter<int>      m_pxRenderMode;
+    ofParameter<int>      m_pxAttractMode;
+    
     ofParameter<float>   m_pxSize;
     ofParameter<float>   m_pxRateSize;
     
