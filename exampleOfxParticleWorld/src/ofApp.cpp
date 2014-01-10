@@ -91,8 +91,13 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     
     if(button == OF_MOUSE_BUTTON_LEFT){
-        //these are the attraction points used in the forth demo
+        
         m_oWorld.addAttractPoints(ofToString(m_oWorld.m_aAttractors.size()), ofPoint(x, y));
+        
+    }else if(button == OF_MOUSE_BUTTON_RIGHT){
+        
+        m_oWorld.addEmitterPoint(ofToString(m_oWorld.m_aEmitters.size()), ofPoint(x, y));
+        
     }
 
 }

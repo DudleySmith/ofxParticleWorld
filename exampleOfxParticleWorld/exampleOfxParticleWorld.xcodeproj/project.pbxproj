@@ -34,8 +34,8 @@
 		EA3C87A6187FF6350033D12E /* ofxColorSetAnimated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */; };
 		EA3C87AD187FF6C60033D12E /* ofdTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */; };
 		EA3C87B0188004490033D12E /* ofxColorSetUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */; };
+		EA3C87C51880238A0033D12E /* ofxEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87C31880238A0033D12E /* ofxEmitter.cpp */; };
 		EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */; };
-		EA7B6BC5187B6114000F6D9C /* ofxEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC3187B6114000F6D9C /* ofxEmitter.cpp */; };
 		EA7B6BD9187B66F3000F6D9C /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC8187B66F3000F6D9C /* ofxBaseGui.cpp */; };
 		EA7B6BDA187B66F3000F6D9C /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BCA187B66F3000F6D9C /* ofxButton.cpp */; };
 		EA7B6BDB187B66F3000F6D9C /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BCD187B66F3000F6D9C /* ofxGuiGroup.cpp */; };
@@ -116,10 +116,10 @@
 		EA3C87AC187FF6C60033D12E /* ofdTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofdTimer.h; sourceTree = "<group>"; };
 		EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSetUI.cpp; sourceTree = "<group>"; };
 		EA3C87AF188004490033D12E /* ofxColorSetUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSetUI.h; sourceTree = "<group>"; };
+		EA3C87C31880238A0033D12E /* ofxEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxEmitter.cpp; path = ../src/ofxEmitter.cpp; sourceTree = "<group>"; };
+		EA3C87C41880238A0033D12E /* ofxEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxEmitter.h; path = ../src/ofxEmitter.h; sourceTree = "<group>"; };
 		EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxAttractor.cpp; path = ../src/ofxAttractor.cpp; sourceTree = "<group>"; };
 		EA7B6BC1187B582C000F6D9C /* ofxAttractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxAttractor.h; path = ../src/ofxAttractor.h; sourceTree = "<group>"; };
-		EA7B6BC3187B6114000F6D9C /* ofxEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxEmitter.cpp; path = ../src/ofxEmitter.cpp; sourceTree = "<group>"; };
-		EA7B6BC4187B6114000F6D9C /* ofxEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxEmitter.h; path = ../src/ofxEmitter.h; sourceTree = "<group>"; };
 		EA7B6BC8187B66F3000F6D9C /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		EA7B6BC9187B66F3000F6D9C /* ofxBaseGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
 		EA7B6BCA187B66F3000F6D9C /* ofxButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButton.cpp; sourceTree = "<group>"; };
@@ -180,13 +180,13 @@
 		AFDC6AEF97A4888D9357F236 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				EA3C87C31880238A0033D12E /* ofxEmitter.cpp */,
+				EA3C87C41880238A0033D12E /* ofxEmitter.h */,
 				A1E38EB054E9DAF28DF01118 /* ofxParticle.cpp */,
 				CA3901C38FB6A28594DE571C /* ofxParticle.h */,
 				EACA97CB187DEF2000621353 /* ofxParticleWorldDefine.h */,
 				5D2451BF59A3085725D62973 /* ofxParticleWorld.cpp */,
 				F575F38CC7622302A12F0342 /* ofxParticleWorld.h */,
-				EA7B6BC3187B6114000F6D9C /* ofxEmitter.cpp */,
-				EA7B6BC4187B6114000F6D9C /* ofxEmitter.h */,
 				EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */,
 				EA7B6BC1187B582C000F6D9C /* ofxAttractor.h */,
 			);
@@ -440,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				EA3C87C51880238A0033D12E /* ofxEmitter.cpp in Sources */,
 				EA7B6BE0187B66F3000F6D9C /* ofxToggle.cpp in Sources */,
 				EA3C87A6187FF6350033D12E /* ofxColorSetAnimated.cpp in Sources */,
 				EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */,
@@ -452,7 +453,6 @@
 				EA7B6BDB187B66F3000F6D9C /* ofxGuiGroup.cpp in Sources */,
 				EA3C87AD187FF6C60033D12E /* ofdTimer.cpp in Sources */,
 				EA3C87B0188004490033D12E /* ofxColorSetUI.cpp in Sources */,
-				EA7B6BC5187B6114000F6D9C /* ofxEmitter.cpp in Sources */,
 				EA7B6BD9187B66F3000F6D9C /* ofxBaseGui.cpp in Sources */,
 				486E5F3CFFFD56F8A14F58F7 /* ofxParticleWorld.cpp in Sources */,
 				EA7B6BDE187B66F3000F6D9C /* ofxSlider.cpp in Sources */,

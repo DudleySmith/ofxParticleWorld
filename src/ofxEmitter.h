@@ -2,32 +2,47 @@
 //  ofxEmitter.h
 //  exampleOfxParticleWorld
 //
-//  Created by Dudley Smith on 06/01/2014.
+//  Created by Dudley Smith on 10/01/2014.
 //
 //
 
 #pragma once
 
-#include <iostream>
 #include "ofMain.h"
+//#include "ofxParticleWorld.h"
 
-enum emitterMode{
-	EMITTER_MODE_RANDOM = 0,
-	EMITTER_MODE_POINT,
-	EMITTER_MODE_LINE
+class ofxParticleWorld;
+
+enum emitType{
+    EMIT_RANDOM = 0,
+    EMIT_POINT,
+    EMIT_LINE,
+    EMIT_SQUARE
 };
 
-
 class ofxEmitter {
-
+    
 public:
     ofxEmitter();
     
-    // Position --
 private:
-    ofPoint m_oPos;
+    ofPoint m_oPt1;
+    ofPoint m_oPt2;
+    
+    ofVec3f m_oPulse;
+    
+    ofxParticleWorld *m_pWorld;
+    emitType         m_eEmitType;
+    
+    float   m_rFlow;
+    
 public:
-    void setPos(ofPoint _pos){m_oPos = _pos;}
-    ofPoint getPos(){return m_oPos;}
+    void emit();
+    void draw();
+    void setFlow(float _flow){m_rFlow = _flow;}
+    void setEmitType(emitType _emitType){m_eEmitType = _emitType;}
+    
+    void setPoint(ofPoint _P1);
+    void setLine(ofPoint _P1, ofPoint _P2);
     
 };

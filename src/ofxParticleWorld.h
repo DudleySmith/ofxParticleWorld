@@ -21,6 +21,10 @@ public:
     
     void addAttractPoints(string _name, ofPoint _pos);
     
+    void addEmitterRandom(string _name);
+    void addEmitterPoint(string _name, ofPoint _p1);
+    void addEmitterLine(string _name, ofPoint _p1, ofPoint _p2);
+    
     /*
     void keyPressed  (int key);
     void keyReleased(int key);
@@ -35,7 +39,7 @@ public:
     
     vector <ofxParticle>    m_aParts;
     vector <ofxAttractor>   m_aAttractors;
-    vector <ofxEmitter>     m_aEmitters;
+    map <string, ofxEmitter>     m_aEmitters;
     
     ofxColorSet             *m_pColorSet;
     

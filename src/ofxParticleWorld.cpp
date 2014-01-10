@@ -114,10 +114,7 @@ void ofxParticleWorld::drawEmitters(){
     ofSetColor(ofColor::blue);
     
     for(unsigned int i = 0; i < m_aEmitters.size(); i++){
-        ofNoFill();
-        ofCircle(m_aEmitters[i].getPos(), 10);
-        ofFill();
-        ofCircle(m_aEmitters[i].getPos(), 4);
+        m_aEmitters[ofToString(i)].draw();
     }
     
 }
@@ -130,6 +127,32 @@ void ofxParticleWorld::addAttractPoints(string _name, ofPoint _pos){
     
     m_aAttractors.push_back(attractorToAdd);
     
+}
+
+//--------------------------------------------------------------
+void ofxParticleWorld::addEmitterRandom(string _name){
+    ofxEmitter emitterToAdd;
+    
+    emitterToAdd.setEmitType(EMIT_RANDOM);
+    m_aEmitters[_name] = emitterToAdd;
+}
+
+//--------------------------------------------------------------
+void ofxParticleWorld::addEmitterPoint(string _name, ofPoint _p1){
+    ofxEmitter emitterToAdd;
+    
+    emitterToAdd.setEmitType(EMIT_POINT);
+    emitterToAdd.setPoint(_p1);
+    m_aEmitters[_name] = emitterToAdd;
+}
+
+//--------------------------------------------------------------
+void ofxParticleWorld::addEmitterLine(string _name, ofPoint _p1, ofPoint _p2){
+    ofxEmitter emitterToAdd;
+    
+    emitterToAdd.setEmitType(EMIT_LINE);
+    emitterToAdd.setLine(_p1, _p2);
+    m_aEmitters[_name] = emitterToAdd;
 }
 
 
