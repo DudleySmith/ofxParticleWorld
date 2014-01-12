@@ -35,7 +35,6 @@
 		EA3C87AD187FF6C60033D12E /* ofdTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */; };
 		EA3C87B0188004490033D12E /* ofxColorSetUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */; };
 		EA3C87C51880238A0033D12E /* ofxEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3C87C31880238A0033D12E /* ofxEmitter.cpp */; };
-		EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */; };
 		EA7B6BD9187B66F3000F6D9C /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BC8187B66F3000F6D9C /* ofxBaseGui.cpp */; };
 		EA7B6BDA187B66F3000F6D9C /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BCA187B66F3000F6D9C /* ofxButton.cpp */; };
 		EA7B6BDB187B66F3000F6D9C /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BCD187B66F3000F6D9C /* ofxGuiGroup.cpp */; };
@@ -44,6 +43,8 @@
 		EA7B6BDE187B66F3000F6D9C /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BD3187B66F3000F6D9C /* ofxSlider.cpp */; };
 		EA7B6BDF187B66F3000F6D9C /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BD5187B66F3000F6D9C /* ofxSliderGroup.cpp */; };
 		EA7B6BE0187B66F3000F6D9C /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7B6BD7187B66F3000F6D9C /* ofxToggle.cpp */; };
+		EA97037E1882C97900692B86 /* ofxConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97037C1882C97900692B86 /* ofxConstraint.cpp */; };
+		EA9703801882CD4500692B86 /* ofxAttractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97037F1882CD4500692B86 /* ofxAttractor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +119,6 @@
 		EA3C87AF188004490033D12E /* ofxColorSetUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSetUI.h; sourceTree = "<group>"; };
 		EA3C87C31880238A0033D12E /* ofxEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxEmitter.cpp; path = ../src/ofxEmitter.cpp; sourceTree = "<group>"; };
 		EA3C87C41880238A0033D12E /* ofxEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxEmitter.h; path = ../src/ofxEmitter.h; sourceTree = "<group>"; };
-		EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxAttractor.cpp; path = ../src/ofxAttractor.cpp; sourceTree = "<group>"; };
 		EA7B6BC1187B582C000F6D9C /* ofxAttractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxAttractor.h; path = ../src/ofxAttractor.h; sourceTree = "<group>"; };
 		EA7B6BC8187B66F3000F6D9C /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		EA7B6BC9187B66F3000F6D9C /* ofxBaseGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
@@ -137,6 +137,9 @@
 		EA7B6BD6187B66F3000F6D9C /* ofxSliderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		EA7B6BD7187B66F3000F6D9C /* ofxToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		EA7B6BD8187B66F3000F6D9C /* ofxToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		EA97037C1882C97900692B86 /* ofxConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxConstraint.cpp; path = ../src/ofxConstraint.cpp; sourceTree = "<group>"; };
+		EA97037D1882C97900692B86 /* ofxConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxConstraint.h; path = ../src/ofxConstraint.h; sourceTree = "<group>"; };
+		EA97037F1882CD4500692B86 /* ofxAttractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxAttractor.cpp; path = ../src/ofxAttractor.cpp; sourceTree = "<group>"; };
 		EACA97CB187DEF2000621353 /* ofxParticleWorldDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofxParticleWorldDefine.h; path = ../../ofxParticleWorld_/src/ofxParticleWorldDefine.h; sourceTree = "<group>"; };
 		F575F38CC7622302A12F0342 /* ofxParticleWorld.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; lineEnding = 0; name = ofxParticleWorld.h; path = ../../../addons/ofxParticleWorld/src/ofxParticleWorld.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 /* End PBXFileReference section */
@@ -187,8 +190,10 @@
 				EACA97CB187DEF2000621353 /* ofxParticleWorldDefine.h */,
 				5D2451BF59A3085725D62973 /* ofxParticleWorld.cpp */,
 				F575F38CC7622302A12F0342 /* ofxParticleWorld.h */,
-				EA7B6BC0187B582C000F6D9C /* ofxAttractor.cpp */,
+				EA97037F1882CD4500692B86 /* ofxAttractor.cpp */,
 				EA7B6BC1187B582C000F6D9C /* ofxAttractor.h */,
+				EA97037C1882C97900692B86 /* ofxConstraint.cpp */,
+				EA97037D1882C97900692B86 /* ofxConstraint.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -443,8 +448,9 @@
 				EA3C87C51880238A0033D12E /* ofxEmitter.cpp in Sources */,
 				EA7B6BE0187B66F3000F6D9C /* ofxToggle.cpp in Sources */,
 				EA3C87A6187FF6350033D12E /* ofxColorSetAnimated.cpp in Sources */,
-				EA7B6BC2187B582C000F6D9C /* ofxAttractor.cpp in Sources */,
+				EA97037E1882C97900692B86 /* ofxConstraint.cpp in Sources */,
 				EA7B6BDC187B66F3000F6D9C /* ofxLabel.cpp in Sources */,
+				EA9703801882CD4500692B86 /* ofxAttractor.cpp in Sources */,
 				EA7B6BDF187B66F3000F6D9C /* ofxSliderGroup.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				31E0CEF024E614667837F4D9 /* ofxParticle.cpp in Sources */,

@@ -5,9 +5,9 @@
 		<ForceX>1</ForceX>
 		<ForceY>1</ForceY>
 		<Pulse>3.85204</Pulse>
-		<Life>0</Life>
+		<Life>0.622449</Life>
 		<Friction>0</Friction>
-		<IsEternal>0</IsEternal>
+		<IsEternal>1</IsEternal>
 	<RateSize>0.336735</RateSize>
 		<ForcesMin>0.1</ForcesMin>
 	<Drag>0.897959</Drag>
@@ -15,8 +15,38 @@
 		<ForceDistanceMax>500</ForceDistanceMax>
 		<VelMax>30.102</VelMax>
 	<RenderMode>11</RenderMode>
-		<AttractMode>0</AttractMode>
+		<AttractMode>1</AttractMode>
+	<World>
+			<RenderMode>2</RenderMode>
+			<AttractMode>0</AttractMode>
+			<VelMax>16.7014</VelMax>
+			<NbPartsMax>71</NbPartsMax>
+			<FpsMax>81.2578</FpsMax>
+		<ColorMode>1</ColorMode>
+		<ZMax>100</ZMax>
+		</World>
+		<Parts>
+			<Size>7.23969</Size>
+			<RateSize>0.557476</RateSize>
+			<Life>19.167</Life>
+			<IsEternalLife>0</IsEternalLife>
+		</Parts>
+		<Attractions>
+			<CoefForces>0.688047</CoefForces>
+			<CoefForcesMin>0.0213869</CoefForcesMin>
+			<CoefForces_X>1</CoefForces_X>
+			<CoefForces_Y>1</CoefForces_Y>
+			<Pulse>0.760516</Pulse>
+			<Drag>0.541858</Drag>
+			<DistMin>113.338</DistMin>
+			<DistMax>317.993</DistMax>
+		</Attractions>
+		<Emissions>
+			<Pulse>0.760516</Pulse>
+			<Flow>200</Flow>
+		</Emissions>
 	</Parts_settings>
 <group/>
-<FPS>18.6467</FPS>
+<FPS>55.7085</FPS>
+<Nb_Parts>4021</Nb_Parts>
 </group>

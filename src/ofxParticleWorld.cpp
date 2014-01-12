@@ -7,54 +7,49 @@ void ofxParticleWorld::setup(ofxColorSet& _colorSet){
     
     loadSettings();
     
-	int num = 1500;
-	m_aParts.assign(num, ofxParticle());
-	
-	resetParticles();
-    
 }
 
 //--------------------------------------------------------------
 void ofxParticleWorld::loadSettings(){
+
     
     // Settings ---------------
     m_pgSets.setName("Parts settings");
-    m_pgSets.add(m_pxRenderMode.set(cpxRender, 0, PRENDER_NoRender, PRENDER_OBLIQU));
-    m_pgSets.add(m_pxAttractMode.set(cpxAttract, 0, PATTRACTOR_ATTRACT, PATTRACTOR_NOISE));
     
-    m_pgSets.add(m_pxSize.set(cpxSize, 0, 1, 20));
-    m_pgSets.add(m_pxRateSize.set(cpxRateSize, 0, 0, 1));
+    m_pgWorld.setName("World");
+    m_pgWorld.add(m_pxRenderMode.set("RenderMode", 0, PRENDER_NoRender, PRENDER_OBLIQU));
+    m_pgWorld.add(m_pxAttractMode.set("AttractMode", 0, PATTRACTOR_ATTRACT, PATTRACTOR_NOISE));
+    m_pgWorld.add(m_pxColorMode.set("ColorMode", 0, PCOLOR_MODE_CREATION, PCOLOR_MODE_VEL));
+    m_pgWorld.add(m_pxVelMax.set("VelMax", 1, 0, 100));
+    m_pgWorld.add(m_pxNbPartsMax.set("NbPartsMax", 1, 0, 100));
+    m_pgWorld.add(m_pxFpsToSave.set("FpsMax", 1, 0, 60));
+    m_pgWorld.add(m_pxZMax.set("ZMax", 1, 0, 100));
     
-    m_pgSets.add(m_pxCoefForces.set(cpxCoefForces, 0.4, 0, 2));
-    m_pgSets.add(m_pxCoefForcesMin.set(cpxCoefForcesMin, 0.05, 0, 0.1));
-    m_pgSets.add(m_pxCoefForces_X.set(cpxCoefForces_X, 0, 0, 1));
-    m_pgSets.add(m_pxCoefForces_Y.set(cpxCoefForces_Y, 0, 0, 1));
-    m_pgSets.add(m_pxPulse.set(cpxPulse, 0.5, 0, 5));
-    m_pgSets.add(m_pxDrag.set(cpxDrag, 0.5, 0, 1));
-    m_pgSets.add(m_pxDistMin.set(cpxDistMin, 40, 0, 250));
-    m_pgSets.add(m_pxDistMax.set(cpxDistMax, 300, 0, 1000));
-    m_pgSets.add(m_pxVelMax.set(cpxVelMax, 1, 0, 100));
+    m_pgParts.setName("Parts");
+    m_pgParts.add(m_pxSize.set("Size", 0, 1, 20));
+    m_pgParts.add(m_pxRateSize.set("RateSize", 0, 0, 1));
+    m_pgParts.add(m_pxLifeBase.set("Life", 1, 0, 20));
+    m_pgParts.add(m_pxEternalLife.set("IsEternalLife", 0));
     
-    m_pgSets.add(m_pxLifeBase.set(cpxLifeBase, 0.5, 0, 1));
-    m_pgSets.add(m_pxEternalLife.set(cpxEternalLife, 0, 0, 10));
+    m_pgAttractions.setName("Attractions");
+    m_pgAttractions.add(m_pxCoefForces.set("CoefForces", 0.4, 0, 2));
+    m_pgAttractions.add(m_pxCoefForcesMin.set("CoefForcesMin", 0.05, 0, 0.1));
+    m_pgAttractions.add(m_pxCoefForces_X.set("CoefForces_X", 0, 0, 1));
+    m_pgAttractions.add(m_pxCoefForces_Y.set("CoefForces_Y", 0, 0, 1));
+    m_pgAttractions.add(m_pxPulse.set("Pulse", 0.5, 0, 5));
+    m_pgAttractions.add(m_pxDrag.set("Drag", 0.5, 0, 1));
+    m_pgAttractions.add(m_pxDistMin.set("DistMin", 40, 0, 250));
+    m_pgAttractions.add(m_pxDistMax.set("DistMax", 300, 0, 1000));
+    
+    m_pgEmissions.setName("Emissions");
+    m_pgEmissions.add(m_pxPulse.set("Pulse", 0.5, 0, 1));
+    m_pgEmissions.add(m_pxFlow.set("Flow", 40, 0, 200));
 
-}
-
-//--------------------------------------------------------------
-void ofxParticleWorld::resetParticles(){
-
-	vector<ofxParticle>::iterator   oneParticle;
+    m_pgSets.add(m_pgWorld);
+    m_pgSets.add(m_pgParts);
+    m_pgSets.add(m_pgAttractions);
+    m_pgSets.add(m_pgEmissions);
     
-    for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); oneParticle++){
-    	(*oneParticle).setAttractPoints(&m_aAttractors);
-        
-        ofVec3f originVel;
-        originVel.x = ofRandom(-1*m_pxPulse, m_pxPulse);
-        originVel.y = ofRandom(-1*m_pxPulse, m_pxPulse);
-        
-		(*oneParticle).reset(originVel);
-	}
-	
 }
 
 //--------------------------------------------------------------
@@ -62,9 +57,19 @@ void ofxParticleWorld::update(){
     
     vector<ofxParticle>::iterator   oneParticle;
     
-    for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); oneParticle++){
-        (*oneParticle).update(m_pgSets);
-	}
+    for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); ++oneParticle){
+        
+        (*oneParticle).setAttractPoints(&m_aAttractors);
+        
+        if(getPxEternalLife()==false && (*oneParticle).isDead(getPxLifeBase()) == true){
+            oneParticle = m_aParts.erase(oneParticle);
+        }else{
+            (*oneParticle).update();
+        }
+        
+        if(oneParticle == m_aParts.end())   break;
+
+    }
     
 }
 
@@ -72,90 +77,49 @@ void ofxParticleWorld::update(){
 void ofxParticleWorld::drawParticles(){
     
     vector<ofxParticle>::iterator   oneParticle;
-    ofColor                         colorToDraw;
-    int                             idxPart = 0;
-    
-    ofBackgroundGradient(ofColor(60,60,60), ofColor(10,10,10));
 
-	
     for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); oneParticle++){
-        float gradientProgress = (float)idxPart/(float)m_aParts.size();
-        
-        colorToDraw = m_pColorSet->getCurrentSetByProgress(gradientProgress);
-        idxPart++;
-        
-        (*oneParticle).setColor(colorToDraw);
-    	(*oneParticle).draw();
+        (*oneParticle).draw();
 	}
-    
-
-    
-
-	
 }
 
 //--------------------------------------------------------------
 void ofxParticleWorld::drawAttractors(){
     
-    ofSetColor(ofColor::red);
-    
     for(unsigned int i = 0; i < m_aAttractors.size(); i++){
-        ofNoFill();
-        ofCircle(m_aAttractors[i].getPos(), 10);
-        ofFill();
-        ofCircle(m_aAttractors[i].getPos(), 4);
+        m_aAttractors[i].draw();
     }
     
 }
 
-//--------------------------------------------------------------
-void ofxParticleWorld::drawEmitters(){
-    
-    ofSetColor(ofColor::blue);
-    
-    for(unsigned int i = 0; i < m_aEmitters.size(); i++){
-        m_aEmitters[ofToString(i)].draw();
-    }
-    
-}
 
 //--------------------------------------------------------------
-void ofxParticleWorld::addAttractPoints(string _name, ofPoint _pos){
+void ofxParticleWorld::addAttractPoints(string _name, ofPoint _p1){
     
     ofxAttractor attractorToAdd;
-    attractorToAdd.setPos(_pos);
+    attractorToAdd.setPoint(_p1);
+    attractorToAdd.setType(CONSTRAINT_POINT);
     
     m_aAttractors.push_back(attractorToAdd);
     
 }
 
 //--------------------------------------------------------------
-void ofxParticleWorld::addEmitterRandom(string _name){
-    ofxEmitter emitterToAdd;
+void ofxParticleWorld::addAttractLine(string _name, ofPoint _p1, ofPoint _p2){
     
-    emitterToAdd.setEmitType(EMIT_RANDOM);
-    m_aEmitters[_name] = emitterToAdd;
+    ofxAttractor attractorToAdd;
+    attractorToAdd.setLine(_p1, _p2);
+    attractorToAdd.setType(CONSTRAINT_LINE);
+    
+    m_aAttractors.push_back(attractorToAdd);
+    
 }
 
 //--------------------------------------------------------------
-void ofxParticleWorld::addEmitterPoint(string _name, ofPoint _p1){
-    ofxEmitter emitterToAdd;
-    
-    emitterToAdd.setEmitType(EMIT_POINT);
-    emitterToAdd.setPoint(_p1);
-    m_aEmitters[_name] = emitterToAdd;
+void ofxParticleWorld::clear(){
+    m_aParts.erase(m_aParts.begin(), m_aParts.end());
+    m_aAttractors.erase(m_aAttractors.begin(), m_aAttractors.end());
 }
-
-//--------------------------------------------------------------
-void ofxParticleWorld::addEmitterLine(string _name, ofPoint _p1, ofPoint _p2){
-    ofxEmitter emitterToAdd;
-    
-    emitterToAdd.setEmitType(EMIT_LINE);
-    emitterToAdd.setLine(_p1, _p2);
-    m_aEmitters[_name] = emitterToAdd;
-}
-
-
 /*
 //--------------------------------------------------------------
 void ofxParticleWorld::keyPressed(int key){

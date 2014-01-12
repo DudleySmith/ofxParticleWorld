@@ -4,6 +4,7 @@
 void ofApp::setup(){
     
     ofSetFrameRate(60);
+    ofSetLogLevel(OF_LOG_VERBOSE);
     
     m_oWorld.setup(m_oColorSet);
     m_oColorSet.setup("ColorSets.xml");
@@ -12,6 +13,8 @@ void ofApp::setup(){
     gpParts.add(m_oWorld.m_pgSets);
     uiParts.setup(gpParts);
     uiParts.add(fps.setup("FPS", ""));
+    uiParts.add(nbParts.setup("Nb Parts", ""));
+    uiParts.add(dist.setup("Distance", ""));
     uiParts.setPosition(10, 100);
     uiParts.loadFromFile("Settings.xml");
     
@@ -26,28 +29,35 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_ATTRACT){
+    if(m_oWorld.getPxAttractMode() == PATTRACTOR_ATTRACT){
         currentModeStr = "1 - PATTRACTOR_ATTRACT: attracts";
 	}
-	if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_REPEL){
+	if(m_oWorld.getPxAttractMode() == PATTRACTOR_REPEL){
 		currentModeStr = "2 - PATTRACTOR_REPEL: repels";
 	}
-	if( m_oWorld.m_pgSets.get(cpxAttract).cast<partAttractorMode>() == PATTRACTOR_NOISE){
+	if(m_oWorld.getPxAttractMode() == PATTRACTOR_NOISE){
 		currentModeStr = "3 - PATTRACTOR_NOISE: windy";
 	}
     
     m_oColorSet.update(btReload);
     
     m_oWorld.update();
+    
+    // Emitting
+    map<string, ofxEmitter>::iterator oneEmitter;
+    for (oneEmitter=m_aEmitters.begin(); oneEmitter!=m_aEmitters.end(); oneEmitter++) {
+        (*oneEmitter).second.update();
+    }
+    
     fps = ofToString(ofGetFrameRate());
+    nbParts = ofToString(m_oWorld.m_aParts.size());
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    m_oWorld.drawParticles();
-    m_oWorld.drawAttractors();
-    m_oWorld.drawEmitters();
+    ofBackgroundGradient(ofColor(60,60,60), ofColor(10,10,10));
     
     uiParts.draw();
     uiColors.draw();
@@ -55,25 +65,43 @@ void ofApp::draw(){
     ofSetColor(230);
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset.", 10, 20);
     
+    //--------------------------------------------------------------
+    m_oWorld.drawParticles();
+    m_oWorld.drawAttractors();
+    for(unsigned int i = 0; i < m_aEmitters.size(); i++){
+        m_aEmitters[ofToString(i)].draw();
+    }
+    
+    //--------------------------------------------------------------
+    ofSetColor(ofColor::white);
+    vector <ofxAttractor>::iterator oneAttractor;
+    for(oneAttractor=m_oWorld.m_aAttractors.begin(); oneAttractor!=m_oWorld.m_aAttractors.end(); oneAttractor++){
+        if(oneAttractor->getType() == CONSTRAINT_LINE){
+            ofVec3f distance = oneAttractor->shortDistance(ofPoint(ofGetMouseX(), ofGetMouseY()));
+            dist = ofToString(distance.length());
+            
+            ofLine(ofPoint(ofGetMouseX(), ofGetMouseY()), distance + ofPoint(ofGetMouseX(), ofGetMouseY()));
+        }
+    }
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
-    
-	if( key == ' ' ){
-		m_oWorld.resetParticles();
-	}
-
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    if(key==' '){
+        m_oWorld.clear();
+        m_aEmitters.erase(m_aEmitters.begin(), m_aEmitters.end());
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
+
+    
 
 }
 
@@ -84,19 +112,33 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    ptStart = ofPoint(x,y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     
+    ptEnd = ofPoint(x,y);
+    ofVec3f dist = ptStart - ptEnd;
+    
     if(button == OF_MOUSE_BUTTON_LEFT){
-        
-        m_oWorld.addAttractPoints(ofToString(m_oWorld.m_aAttractors.size()), ofPoint(x, y));
+        if(ofGetKeyPressed(OF_KEY_LEFT_SHIFT)==true || ofGetKeyPressed(OF_KEY_RIGHT_SHIFT)==true){
+            m_aEmitters[ofToString(m_aEmitters.size())] = ofxEmitter(m_oWorld);
+        }else{
+            if(dist.length() <= 50){
+                m_aEmitters[ofToString(m_aEmitters.size())] = ofxEmitter(m_oWorld, ptEnd);
+            }else{
+                m_aEmitters[ofToString(m_aEmitters.size())] = ofxEmitter(m_oWorld, ptStart, ptEnd);
+            }
+        }
+
         
     }else if(button == OF_MOUSE_BUTTON_RIGHT){
-        
-        m_oWorld.addEmitterPoint(ofToString(m_oWorld.m_aEmitters.size()), ofPoint(x, y));
+        if(dist.length() <= 50){
+            m_oWorld.addAttractPoints(ofToString(m_oWorld.m_aAttractors.size()), ptStart);
+        }else{
+            m_oWorld.addAttractLine(ofToString(m_oWorld.m_aAttractors.size()), ptStart, ptEnd);
+        }
         
     }
 

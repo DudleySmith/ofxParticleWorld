@@ -7,6 +7,7 @@
 #include "ofxColorSet.h"
 
 
+class ofxParticle;
 
 class ofxParticleWorld{
 
@@ -16,14 +17,11 @@ public:
     void update();
     void drawParticles();
     void drawAttractors();
-    void drawEmitters();
-    void resetParticles();
     
     void addAttractPoints(string _name, ofPoint _pos);
-    
-    void addEmitterRandom(string _name);
-    void addEmitterPoint(string _name, ofPoint _p1);
-    void addEmitterLine(string _name, ofPoint _p1, ofPoint _p2);
+    void addAttractLine(string _name, ofPoint _p1, ofPoint _p2);
+
+    void clear();
     
     /*
     void keyPressed  (int key);
@@ -39,7 +37,6 @@ public:
     
     vector <ofxParticle>    m_aParts;
     vector <ofxAttractor>   m_aAttractors;
-    map <string, ofxEmitter>     m_aEmitters;
     
     ofxColorSet             *m_pColorSet;
     
@@ -47,23 +44,57 @@ public:
     ofParameterGroup     m_pgSets;
     
 private:
-    ofParameter<int>      m_pxRenderMode;
-    ofParameter<int>      m_pxAttractMode;
+    ofParameterGroup     m_pgWorld;
+    ofParameter<int>     m_pxRenderMode;
+    ofParameter<int>     m_pxAttractMode;
+    ofParameter<int>     m_pxColorMode;
+    ofParameter<float>   m_pxVelMax;
+    ofParameter<int>     m_pxNbPartsMax;
+    ofParameter<float>   m_pxFpsToSave;
+    ofParameter<float>   m_pxZMax;
     
+    ofParameterGroup     m_pgParts;
     ofParameter<float>   m_pxSize;
     ofParameter<float>   m_pxRateSize;
+    ofParameter<float>   m_pxLifeBase;
+    ofParameter<bool>    m_pxEternalLife;
     
+    ofParameterGroup     m_pgAttractions;
     ofParameter<float>   m_pxCoefForces;
     ofParameter<float>   m_pxCoefForcesMin;
     ofParameter<float>   m_pxCoefForces_X;
     ofParameter<float>   m_pxCoefForces_Y;
-    ofParameter<float>   m_pxPulse;
     ofParameter<float>   m_pxDrag;
     ofParameter<float>   m_pxDistMin;
     ofParameter<float>   m_pxDistMax;
-    ofParameter<float>   m_pxVelMax;
     
-    ofParameter<float>   m_pxLifeBase;
-    ofParameter<bool>    m_pxEternalLife;
+    ofParameterGroup     m_pgEmissions;
+    ofParameter<float>   m_pxPulse;
+    ofParameter<float>   m_pxFlow;
+    
+public:
+    partRenderMode getPxRenderMode(){return m_pxRenderMode.cast<partRenderMode>();}
+    partAttractorMode getPxAttractMode(){return m_pxAttractMode.cast<partAttractorMode>();}
+    partColorMode getPxColorMode(){return m_pxColorMode.cast<partColorMode>();}
+    float getPxVelMax(){return m_pxVelMax.get();}
+    int getPxPartsMax(){return m_pxNbPartsMax.get();}
+    float getPxFpsToSave(){return m_pxFpsToSave.get();}
+    float getPxZMax(){return m_pxZMax.get();}
+    
+    float getPxSize(){return m_pxSize.get();}
+    float getPxRateSize(){return m_pxRateSize.get();}
+    float getPxLifeBase(){return m_pxLifeBase.get();}
+    bool  getPxEternalLife(){return m_pxEternalLife.get();}
+    
+    float getPxCoefForces(){return m_pxCoefForces.get();}
+    float getPxForcesMin(){return m_pxCoefForcesMin.get();}
+    float getPxForcesX(){return m_pxCoefForces_X.get();}
+    float getPxForcesY(){return m_pxCoefForces_Y.get();}
+    float getPxDrag(){return m_pxDrag.get();}
+    float getPxDistMin(){return m_pxDistMin.get();}
+    float getPxDistMax(){return m_pxDistMax.get();}
+    
+    float getPxPulse(){return m_pxPulse.get();}
+    float getPxFlow(){return m_pxFlow.get();}
 		
 };

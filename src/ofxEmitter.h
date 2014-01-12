@@ -9,40 +9,34 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofxParticleWorld.h"
+#include "ofxParticle.h"
+#include "ofxConstraint.h"
 
 class ofxParticleWorld;
 
-enum emitType{
-    EMIT_RANDOM = 0,
-    EMIT_POINT,
-    EMIT_LINE,
-    EMIT_SQUARE
-};
-
-class ofxEmitter {
+class ofxEmitter : public ofxConstraint{
     
 public:
+    virtual ~ofxEmitter();
     ofxEmitter();
-    
+    ofxEmitter(ofxEmitter const &_e);
+    ofxEmitter(ofxParticleWorld &m_pWorld);
+    ofxEmitter(ofxParticleWorld &m_pWorld, ofPoint _p1);
+    ofxEmitter(ofxParticleWorld &m_pWorld, ofPoint _p1, ofPoint _p2);
+        
 private:
-    ofPoint m_oPt1;
-    ofPoint m_oPt2;
-    
     ofVec3f m_oPulse;
     
     ofxParticleWorld *m_pWorld;
-    emitType         m_eEmitType;
     
-    float   m_rFlow;
+    float   m_fFlow;
+    bool    m_bEmit;
+    float   m_fLastTimeEmit; // In seconds
     
 public:
-    void emit();
     void draw();
-    void setFlow(float _flow){m_rFlow = _flow;}
-    void setEmitType(emitType _emitType){m_eEmitType = _emitType;}
+    void update();
     
-    void setPoint(ofPoint _P1);
-    void setLine(ofPoint _P1, ofPoint _P2);
+    void setFlow(float _flow){m_fFlow = _flow;}
     
 };

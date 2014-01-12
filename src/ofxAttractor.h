@@ -8,18 +8,10 @@
 
 #pragma once
 
-#include <iostream>
+#include "ofMain.h"
+#include "ofxConstraint.h"
 
-class ofxAttractor {
-    
+class ofxAttractor : public ofxConstraint{
 public:
-    ofxAttractor();
-    
-    // Position --
-private:
-    ofPoint m_oPos;
-public:
-    void setPos(ofPoint _pos){m_oPos = _pos;}
-    ofPoint getPos(){return m_oPos;}
-    
+    void draw();
 };

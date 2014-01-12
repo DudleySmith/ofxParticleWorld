@@ -6,11 +6,17 @@
 //
 //
 
-#include "ofMain.h"
 #include "ofxAttractor.h"
 
-ofxAttractor::ofxAttractor(){
+// -----------------------------------------------------------------------
+void ofxAttractor::draw()
+{
+    ofPushStyle();
+    ofSetColor(ofColor(200,0,0));
     
+    ofxConstraint::draw();
+    ofPopStyle();
+
 }
 
 

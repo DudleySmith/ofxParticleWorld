@@ -33,7 +33,13 @@ class ofApp : public ofBaseApp{
     ofParameterGroup gpColors;
     ofxButton        btReload;
     
+    ofPoint          ptStart;
+    ofPoint          ptEnd;
+    map <string, ofxEmitter>     m_aEmitters;
+    
     ofxLabel         fps;
+    ofxLabel         nbParts;
+    ofxLabel         dist;
     
     ofxColorSet      m_oColorSet;
     
