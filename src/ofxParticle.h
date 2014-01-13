@@ -1,11 +1,12 @@
 #pragma once
 #include "ofMain.h"
 
-#include "ofxAttractor.h"
 #include "ofxParticleWorldDefine.h"
 #include "ofxParticleWorld.h"
+#include "ofxAttractor.h"
 
 class ofxParticleWorld;
+class ofxAttractor;
 
 class ofxParticle{
 

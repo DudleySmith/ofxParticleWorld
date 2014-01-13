@@ -8,15 +8,33 @@
 
 #include "ofxConstraint.h"
 
-
 // -----------------------------------------------------------------------
 ofxConstraint::ofxConstraint(){
-    
 }
 
 // -----------------------------------------------------------------------
+ofxConstraint::ofxConstraint(ofxParticleWorld &_world){
+    m_pWorld = &_world;
+    setType(CONSTRAINT_RANDOM);
+}
+
+//--------------------------------------------------------------
 ofxConstraint::~ofxConstraint(){
-    
+    m_pWorld = NULL;
+}
+
+//--------------------------------------------------------------
+ofxConstraint::ofxConstraint(ofxParticleWorld &_world, ofPoint _p1){
+    m_pWorld = &_world;
+    setType(CONSTRAINT_POINT);
+    setPoint(_p1);
+}
+
+//--------------------------------------------------------------
+ofxConstraint::ofxConstraint(ofxParticleWorld &_world, ofPoint _p1, ofPoint _p2){
+    m_pWorld = &_world;
+    setType(CONSTRAINT_LINE);
+    setLine(_p1, _p2);
 }
 
 // -----------------------------------------------------------------------

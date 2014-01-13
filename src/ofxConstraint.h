@@ -9,6 +9,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxParticleWorldDefine.h"
+
+class ofxParticleWorld;
 
 enum constraintType{
     CONSTRAINT_RANDOM = 0,
@@ -17,11 +20,14 @@ enum constraintType{
     CONSTRAINT_SQUARE
 };
 
-class ofxConstraint {
+class ofxConstraint{
     
 public:
-    ofxConstraint();
     virtual ~ofxConstraint();
+    ofxConstraint();
+    ofxConstraint(ofxParticleWorld &m_pWorld);
+    ofxConstraint(ofxParticleWorld &m_pWorld, ofPoint _p1);
+    ofxConstraint(ofxParticleWorld &m_pWorld, ofPoint _p1, ofPoint _p2);
     
     void draw();
     
@@ -31,6 +37,8 @@ protected:
     ofPoint m_oPt2;
 
     constraintType m_eType;
+    
+    ofxParticleWorld *m_pWorld;
     
 public:
     void setPoint(ofPoint _pt1);

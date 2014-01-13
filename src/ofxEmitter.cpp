@@ -13,15 +13,8 @@ ofxEmitter::ofxEmitter(){
 }
 
 // -----------------------------------------------------------------------
-ofxEmitter::ofxEmitter(ofxEmitter const &_e){
-    m_pWorld = _e.m_pWorld;
-}
-
-// -----------------------------------------------------------------------
-ofxEmitter::ofxEmitter(ofxParticleWorld &_world){
-    m_pWorld = &_world;
+ofxEmitter::ofxEmitter(ofxParticleWorld &_world) : ofxConstraint(_world){
     m_fLastTimeEmit = ofGetElapsedTimeMillis();
-    setType(CONSTRAINT_RANDOM);
 }
 
 //--------------------------------------------------------------
@@ -30,19 +23,13 @@ ofxEmitter::~ofxEmitter(){
 }
 
 //--------------------------------------------------------------
-ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1){
-    m_pWorld = &_world;
-    setType(CONSTRAINT_POINT);
+ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1) : ofxConstraint(_world, _p1){
     m_fLastTimeEmit = ofGetElapsedTimeMillis();
-    setPoint(_p1);
 }
 
 //--------------------------------------------------------------
-ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1, ofPoint _p2){
-    m_pWorld = &_world;
-    setType(CONSTRAINT_LINE);
+ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1, ofPoint _p2) : ofxConstraint(_world, _p1, _p2){
     m_fLastTimeEmit = ofGetElapsedTimeMillis();
-    setLine(_p1, _p2);
 }
 
 // -----------------------------------------------------------------------
@@ -53,6 +40,17 @@ void ofxEmitter::draw()
     
     ofxConstraint::draw();
     ofPopStyle();
+}
+
+// -----------------------------------------------------------------------
+ofxEmitter::ofxEmitter(ofxEmitter const &_e){
+    // -
+    m_oPt1 = _e.m_oPt1;
+    m_oPt2 = _e.m_oPt2;
+    m_eType = _e.m_eType;
+    
+    m_pWorld = _e.m_pWorld;
+    
 }
 
 // -----------------------------------------------------------------------
@@ -113,8 +111,16 @@ void ofxEmitter::update(){
             
             partToEmit.reset(originVel);
             partToEmit.setPos(originPos);
+            
             m_pWorld->m_aParts.push_back(partToEmit);
+            
         }
         
     }
+}
+
+// -----------------------------------------------------------------------
+float ofxEmitter::getProximityRate(){
+    float ttttt = m_pWorld->m_aParts.size();
+    return ttttt;
 }

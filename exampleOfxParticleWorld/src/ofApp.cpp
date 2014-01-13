@@ -41,6 +41,7 @@ void ofApp::update(){
     
     m_oColorSet.update(btReload);
     
+    m_oWorld.setAttractors(&m_aAttractors);
     m_oWorld.update();
     
     // Emitting
@@ -67,7 +68,10 @@ void ofApp::draw(){
     
     //--------------------------------------------------------------
     m_oWorld.drawParticles();
-    m_oWorld.drawAttractors();
+    for(unsigned int i = 0; i < m_aAttractors.size(); i++){
+        m_aAttractors[i].draw();
+    }
+    
     for(unsigned int i = 0; i < m_aEmitters.size(); i++){
         m_aEmitters[ofToString(i)].draw();
     }
@@ -75,7 +79,7 @@ void ofApp::draw(){
     //--------------------------------------------------------------
     ofSetColor(ofColor::white);
     vector <ofxAttractor>::iterator oneAttractor;
-    for(oneAttractor=m_oWorld.m_aAttractors.begin(); oneAttractor!=m_oWorld.m_aAttractors.end(); oneAttractor++){
+    for(oneAttractor=m_aAttractors.begin(); oneAttractor!=m_aAttractors.end(); oneAttractor++){
         if(oneAttractor->getType() == CONSTRAINT_LINE){
             ofVec3f distance = oneAttractor->shortDistance(ofPoint(ofGetMouseX(), ofGetMouseY()));
             dist = ofToString(distance.length());
@@ -95,6 +99,7 @@ void ofApp::keyReleased(int key){
     if(key==' '){
         m_oWorld.clear();
         m_aEmitters.erase(m_aEmitters.begin(), m_aEmitters.end());
+        m_aAttractors.erase(m_aAttractors.begin(), m_aAttractors.end());
     }
 }
 
@@ -135,11 +140,10 @@ void ofApp::mouseReleased(int x, int y, int button){
         
     }else if(button == OF_MOUSE_BUTTON_RIGHT){
         if(dist.length() <= 50){
-            m_oWorld.addAttractPoints(ofToString(m_oWorld.m_aAttractors.size()), ptStart);
+            m_aAttractors.push_back(ofxAttractor(m_oWorld, ptEnd));
         }else{
-            m_oWorld.addAttractLine(ofToString(m_oWorld.m_aAttractors.size()), ptStart, ptEnd);
+            m_aAttractors.push_back(ofxAttractor(m_oWorld, ptStart, ptEnd));
         }
-        
     }
 
 }

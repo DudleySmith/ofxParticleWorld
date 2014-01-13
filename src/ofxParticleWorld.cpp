@@ -40,6 +40,7 @@ void ofxParticleWorld::loadSettings(){
     m_pgAttractions.add(m_pxDrag.set("Drag", 0.5, 0, 1));
     m_pgAttractions.add(m_pxDistMin.set("DistMin", 40, 0, 250));
     m_pgAttractions.add(m_pxDistMax.set("DistMax", 300, 0, 1000));
+    m_pgAttractions.add(m_pxMaxProxCounter.set("MaxProxCounter", 500, 0, 1000));
     
     m_pgEmissions.setName("Emissions");
     m_pgEmissions.add(m_pxPulse.set("Pulse", 0.5, 0, 1));
@@ -52,6 +53,11 @@ void ofxParticleWorld::loadSettings(){
     
 }
 
+//------------------------------------------------------------------
+void ofxParticleWorld::setAttractors(vector<ofxAttractor> *attract){
+	m_pAttractors = attract;
+}
+
 //--------------------------------------------------------------
 void ofxParticleWorld::update(){
     
@@ -59,7 +65,7 @@ void ofxParticleWorld::update(){
     
     for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); ++oneParticle){
         
-        (*oneParticle).setAttractPoints(&m_aAttractors);
+        (*oneParticle).setAttractPoints(m_pAttractors);
         
         if(getPxEternalLife()==false && (*oneParticle).isDead(getPxLifeBase()) == true){
             oneParticle = m_aParts.erase(oneParticle);
@@ -83,43 +89,12 @@ void ofxParticleWorld::drawParticles(){
 	}
 }
 
-//--------------------------------------------------------------
-void ofxParticleWorld::drawAttractors(){
-    
-    for(unsigned int i = 0; i < m_aAttractors.size(); i++){
-        m_aAttractors[i].draw();
-    }
-    
-}
-
-
-//--------------------------------------------------------------
-void ofxParticleWorld::addAttractPoints(string _name, ofPoint _p1){
-    
-    ofxAttractor attractorToAdd;
-    attractorToAdd.setPoint(_p1);
-    attractorToAdd.setType(CONSTRAINT_POINT);
-    
-    m_aAttractors.push_back(attractorToAdd);
-    
-}
-
-//--------------------------------------------------------------
-void ofxParticleWorld::addAttractLine(string _name, ofPoint _p1, ofPoint _p2){
-    
-    ofxAttractor attractorToAdd;
-    attractorToAdd.setLine(_p1, _p2);
-    attractorToAdd.setType(CONSTRAINT_LINE);
-    
-    m_aAttractors.push_back(attractorToAdd);
-    
-}
 
 //--------------------------------------------------------------
 void ofxParticleWorld::clear(){
     m_aParts.erase(m_aParts.begin(), m_aParts.end());
-    m_aAttractors.erase(m_aAttractors.begin(), m_aAttractors.end());
 }
+
 /*
 //--------------------------------------------------------------
 void ofxParticleWorld::keyPressed(int key){

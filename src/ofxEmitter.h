@@ -8,26 +8,25 @@
 
 #pragma once
 
-#include "ofMain.h"
-#include "ofxParticle.h"
+#include "ofxParticleWorldDefine.h"
 #include "ofxConstraint.h"
+#include "ofxParticle.h"
 
-class ofxParticleWorld;
+class ofxConstraint;
 
 class ofxEmitter : public ofxConstraint{
     
 public:
     virtual ~ofxEmitter();
     ofxEmitter();
-    ofxEmitter(ofxEmitter const &_e);
     ofxEmitter(ofxParticleWorld &m_pWorld);
     ofxEmitter(ofxParticleWorld &m_pWorld, ofPoint _p1);
     ofxEmitter(ofxParticleWorld &m_pWorld, ofPoint _p1, ofPoint _p2);
-        
+    
+    ofxEmitter(ofxEmitter const &_e);
+    
 private:
     ofVec3f m_oPulse;
-    
-    ofxParticleWorld *m_pWorld;
     
     float   m_fFlow;
     bool    m_bEmit;
@@ -38,5 +37,7 @@ public:
     void update();
     
     void setFlow(float _flow){m_fFlow = _flow;}
+    
+    float getProximityRate();
     
 };

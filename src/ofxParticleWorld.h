@@ -1,26 +1,22 @@
 #pragma once
 
-#include "ofMain.h"
-#include "ofxParticle.h"
-#include "ofxAttractor.h"
-#include "ofxEmitter.h"
 #include "ofxColorSet.h"
 
+#include "ofxParticleWorldDefine.h"
+#include "ofxAttractor.h"
+#include "ofxParticle.h"
 
 class ofxParticle;
+class ofxAttractor;
 
 class ofxParticleWorld{
 
 public:
     void setup(ofxColorSet &_colorSet);
     void loadSettings();
+    void setAttractors(vector<ofxAttractor> *attract);
     void update();
     void drawParticles();
-    void drawAttractors();
-    
-    void addAttractPoints(string _name, ofPoint _pos);
-    void addAttractLine(string _name, ofPoint _p1, ofPoint _p2);
-
     void clear();
     
     /*
@@ -35,8 +31,8 @@ public:
     void gotMessage(ofMessage msg);
     */
     
-    vector <ofxParticle>    m_aParts;
-    vector <ofxAttractor>   m_aAttractors;
+    vector<ofxParticle>     m_aParts;
+    vector<ofxAttractor>    *m_pAttractors;
     
     ofxColorSet             *m_pColorSet;
     
@@ -67,6 +63,7 @@ private:
     ofParameter<float>   m_pxDrag;
     ofParameter<float>   m_pxDistMin;
     ofParameter<float>   m_pxDistMax;
+    ofParameter<int>     m_pxMaxProxCounter;
     
     ofParameterGroup     m_pgEmissions;
     ofParameter<float>   m_pxPulse;
@@ -93,6 +90,7 @@ public:
     float getPxDrag(){return m_pxDrag.get();}
     float getPxDistMin(){return m_pxDistMin.get();}
     float getPxDistMax(){return m_pxDistMax.get();}
+    float getPxMaxProxCounter(){return m_pxMaxProxCounter.get();}
     
     float getPxPulse(){return m_pxPulse.get();}
     float getPxFlow(){return m_pxFlow.get();}

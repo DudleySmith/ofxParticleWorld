@@ -1,9 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxParticleWorld.h"
 #include "ofxGui.h"
 #include "ofxColorSet.h"
+
+#include "ofxParticleWorld.h"
+#include "ofxEmitter.h"
 
 class ofApp : public ofBaseApp{
 
@@ -36,6 +38,8 @@ class ofApp : public ofBaseApp{
     ofPoint          ptStart;
     ofPoint          ptEnd;
     map <string, ofxEmitter>     m_aEmitters;
+    vector<ofxAttractor>        m_aAttractors;
+    
     
     ofxLabel         fps;
     ofxLabel         nbParts;

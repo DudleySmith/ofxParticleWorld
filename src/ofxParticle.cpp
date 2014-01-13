@@ -119,7 +119,7 @@ void ofxParticle::update(){
 		if( m_pAttractPoints ){
 
 			// 1 - find closest attractPoint
-			ofxAttractor            closestAttractor;
+			ofxAttractor                    *closestAttractor;
             vector<ofxAttractor>::iterator  oneAttractor;
             
 			bool findClosest = false;
@@ -135,9 +135,9 @@ void ofxParticle::update(){
                     lenSq = oneAttractor->shortDistance(pos).lengthSquared();
                 }
                 
-				if( lenSq < closestDist ){
+                if( lenSq < closestDist && lenSq < (m_pWorld->getPxDistMax()*m_pWorld->getPxDistMax())){
 					closestDist = lenSq;
-                    closestAttractor = (*oneAttractor);
+                    closestAttractor = &(*oneAttractor);
                     findClosest = true;
 				}
 			}
@@ -145,32 +145,34 @@ void ofxParticle::update(){
 			// 2 - if we have a closest point - lets calcuate the force towards it
 			if( findClosest == true){
                 
-				float dist = sqrt(closestDist);
+                float dist = sqrt(closestDist);
 				
-				//in this case we don't normalize as we want to have the force proportional to distance 
-				
-                
-                if(closestAttractor.getType()==CONSTRAINT_POINT){
-                    frc = closestAttractor.getPt1() - pos;
-                }else if (closestAttractor.getType()==CONSTRAINT_LINE){
-                    frc = closestAttractor.shortDistance(pos);
+				if(closestAttractor->getType()==CONSTRAINT_POINT){
+                    frc = closestAttractor->getPt1() - pos;
+                }else if (closestAttractor->getType()==CONSTRAINT_LINE){
+                    frc = closestAttractor->shortDistance(pos);
                 }
                 
-                
                 if (m_eAttractMode == PATTRACTOR_ATTRACT) {
+                    
                     vel *= localDrag;
                     
                     //lets also limit our attraction to a certain distance
                     if(dist < m_pWorld->getPxDistMax() && dist > m_pWorld->getPxDistMin()){
+                        
+                        closestAttractor->incProximityCounter();
                         vel += frc * forceCoefMin;
+                        
                     }else{
                         //if the particles are not close to us, lets add a little bit of random movement using noise. this is where m_fUniqueVal comes in handy.
-                        frc.x = ofSignedNoise(m_fUniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
-                        frc.y = ofSignedNoise(m_fUniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
-                        frc.z = ofSignedNoise(m_fUniqueVal, pos.z * 0.01, ofGetElapsedTimef()*0.2);
-                        
-                        vel += frc * forceCoef;
+                         frc.x = ofSignedNoise(m_fUniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
+                         frc.y = ofSignedNoise(m_fUniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
+                         frc.z = ofSignedNoise(m_fUniqueVal, pos.z * 0.01, ofGetElapsedTimef()*0.2);
+                         
+                         vel += frc * forceCoef;
+
                     }
+                    
                     
                 } else if(m_eAttractMode == PATTRACTOR_REPEL){
                     
