@@ -81,7 +81,7 @@ void ofApp::draw(){
     vector <ofxAttractor>::iterator oneAttractor;
     for(oneAttractor=m_aAttractors.begin(); oneAttractor!=m_aAttractors.end(); oneAttractor++){
         if(oneAttractor->getType() == CONSTRAINT_LINE){
-            ofVec3f distance = oneAttractor->shortDistance(ofPoint(ofGetMouseX(), ofGetMouseY()));
+            ofVec3f distance = oneAttractor->shortDistance(ofPoint(ofGetMouseX(), ofGetMouseY()), true);
             dist = ofToString(distance.length());
             
             ofLine(ofPoint(ofGetMouseX(), ofGetMouseY()), distance + ofPoint(ofGetMouseX(), ofGetMouseY()));

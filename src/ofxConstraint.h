@@ -51,6 +51,6 @@ public:
     void setType(constraintType _type){m_eType = _type;}
     constraintType getType(){return m_eType;}
     
-    ofVec3f shortDistance(ofVec3f _pt);
+    ofVec3f shortDistance(ofVec3f _pt, bool squareForce);
     
 };

@@ -57,7 +57,7 @@ ofxEmitter::ofxEmitter(ofxEmitter const &_e){
 void ofxEmitter::update(){
     
     ofxParticle partToEmit(*m_pWorld);
-    m_fFlow = m_pWorld->getPxFlow();
+    m_fFlow = m_pWorld->getFlow();
     m_bEmit = true;
     
     // First calculate how many parts to emit, depends on the flow

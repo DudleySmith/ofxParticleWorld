@@ -132,7 +132,7 @@ void ofxParticle::update(){
                 if((*oneAttractor).getType()==CONSTRAINT_POINT){
                     lenSq = (oneAttractor->getPt1() - pos).lengthSquared();
                 }else if ((*oneAttractor).getType()==CONSTRAINT_LINE){
-                    lenSq = oneAttractor->shortDistance(pos).lengthSquared();
+                    lenSq = oneAttractor->shortDistance(pos, true).lengthSquared();
                 }
                 
                 if( lenSq < closestDist && lenSq < (m_pWorld->getPxDistMax()*m_pWorld->getPxDistMax())){
@@ -150,17 +150,20 @@ void ofxParticle::update(){
 				if(closestAttractor->getType()==CONSTRAINT_POINT){
                     frc = closestAttractor->getPt1() - pos;
                 }else if (closestAttractor->getType()==CONSTRAINT_LINE){
-                    frc = closestAttractor->shortDistance(pos);
+                    frc = closestAttractor->shortDistance(pos, true);
                 }
                 
                 if (m_eAttractMode == PATTRACTOR_ATTRACT) {
                     
                     vel *= localDrag;
                     
+                    // Count is only about max proximity
+                    if(dist < m_pWorld->getPxDistMax()){
+                        closestAttractor->incProximityCounter();
+                    }
+                    
                     //lets also limit our attraction to a certain distance
                     if(dist < m_pWorld->getPxDistMax() && dist > m_pWorld->getPxDistMin()){
-                        
-                        closestAttractor->incProximityCounter();
                         vel += frc * forceCoefMin;
                         
                     }else{
@@ -366,10 +369,10 @@ ofColor ofxParticle::colorToDraw(){
             break;
             
         case PCOLOR_MODE_LIFE:
-            if(isDead(m_pWorld->getPxLifeBase())){
+            if(isDead(m_pWorld->getLife())){
                 gradientProgress = 1;
             }else{
-                gradientProgress = m_fLifeTimeInSec / m_pWorld->getPxLifeBase();
+                gradientProgress = m_fLifeTimeInSec / m_pWorld->getLife();
             }
             break;
             

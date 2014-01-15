@@ -58,7 +58,7 @@ void ofxAttractor::draw()
     
     ofTranslate(0.5*(m_oPt1.x+m_oPt2.x) + 10, 0.5*(m_oPt1.y+m_oPt2.y) + 10);
     
-    ofSetColor(200*getProximityRate(), 200*getProximityRate(), 0);
+    ofSetColor(200*getProximityRate());
     
     ofRect(0, 0, 10, 10);
     ofDrawBitmapString(ofToString(getProximityRate()), ofPoint(0,30));

@@ -21,15 +21,18 @@
 			<AttractMode>0</AttractMode>
 			<VelMax>16.7014</VelMax>
 			<NbPartsMax>71</NbPartsMax>
-			<FpsMax>81.2578</FpsMax>
+			<FpsMax>50</FpsMax>
 		<ColorMode>1</ColorMode>
 		<ZMax>100</ZMax>
+		<FpsMin>20</FpsMin>
 		</World>
 		<Parts>
 			<Size>7.23969</Size>
 			<RateSize>0.557476</RateSize>
 			<Life>19.167</Life>
 			<IsEternalLife>0</IsEternalLife>
+		<LifeBase>20</LifeBase>
+			<LifeReal>20</LifeReal>
 		</Parts>
 		<Attractions>
 			<CoefForces>0.688047</CoefForces>
@@ -39,14 +42,18 @@
 			<Pulse>0.760516</Pulse>
 			<Drag>0.541858</Drag>
 			<DistMin>113.338</DistMin>
-			<DistMax>317.993</DistMax>
+			<DistMax>151.395</DistMax>
+		<MaxProxCounter>500</MaxProxCounter>
 		</Attractions>
 		<Emissions>
 			<Pulse>0.760516</Pulse>
 			<Flow>200</Flow>
+		<FlowBase>200</FlowBase>
+			<FlowReal>200</FlowReal>
 		</Emissions>
 	</Parts_settings>
 <group/>
-<FPS>55.7085</FPS>
-<Nb_Parts>4021</Nb_Parts>
+<FPS>55.6856</FPS>
+<Nb_Parts>4457</Nb_Parts>
+<Distance>227.297</Distance>
 </group>

@@ -71,7 +71,7 @@ void ofxConstraint::setLine(ofPoint _P1, ofPoint _P2){
 }
 
 // -----------------------------------------------------------------------
-ofVec3f ofxConstraint::shortDistance(ofVec3f _pt){
+ofVec3f ofxConstraint::shortDistance(ofVec3f _pt, bool squareForce){
 
     /*
      Origin algorithm
@@ -99,10 +99,16 @@ ofVec3f ofxConstraint::shortDistance(ofVec3f _pt){
     // We find projection of point p onto the line.
     // It falls where t = [(p-v) . (w-v)] / |w-v|^2
     float t = (_pt - v).dot(w - v) / l2;
-    if (t < 0.0) return v-_pt;       // Beyond the 'v' end of the segment
-    else if (t > 1.0) return w-_pt;  // Beyond the 'w' end of the segment
-    ofVec3f projection = v + t * (w - v);  // Projection falls on the segment
-
+    
+    ofVec3f projection = ofVec3f::zero();
+    if (t < 0.0){
+        if(squareForce==false)  projection = v; // Beyond the 'v' end of the segment
+    }else if (t > 1.0){
+        if(squareForce==false)  projection = w;  // Beyond the 'w' end of the segment
+    }else{
+        projection = v + t * (w - v);  // Projection falls on the segment
+    }
+    
     return projection-_pt;
 
 }
