@@ -78,7 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5D2451BF59A3085725D62973 /* ofxParticleWorld.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; lineEnding = 0; name = ofxParticleWorld.cpp; path = ../../../addons/ofxParticleWorld/src/ofxParticleWorld.cpp; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		5D2451BF59A3085725D62973 /* ofxParticleWorld.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; lineEnding = 0; name = ofxParticleWorld.cpp; path = ../../../addons/ofxParticleWorld/src/ofxParticleWorld.cpp; sourceTree = SOURCE_ROOT; };
 		A1E38EB054E9DAF28DF01118 /* ofxParticle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; lineEnding = 0; name = ofxParticle.cpp; path = ../../../addons/ofxParticleWorld/src/ofxParticle.cpp; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		CA3901C38FB6A28594DE571C /* ofxParticle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxParticle.h; path = ../../../addons/ofxParticleWorld/src/ofxParticle.h; sourceTree = SOURCE_ROOT; };
@@ -109,10 +109,10 @@
 		EA3C8799187FF6350033D12E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		EA3C879B187FF6350033D12E /* ofxBasicColorSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBasicColorSet.cpp; sourceTree = "<group>"; };
 		EA3C879C187FF6350033D12E /* ofxBasicColorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBasicColorSet.h; sourceTree = "<group>"; };
-		EA3C879D187FF6350033D12E /* ofxColorSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSet.cpp; sourceTree = "<group>"; };
+		EA3C879D187FF6350033D12E /* ofxColorSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; path = ofxColorSet.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		EA3C879E187FF6350033D12E /* ofxColorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSet.h; sourceTree = "<group>"; };
-		EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSetAnimated.cpp; sourceTree = "<group>"; };
-		EA3C87A0187FF6350033D12E /* ofxColorSetAnimated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxColorSetAnimated.h; sourceTree = "<group>"; };
+		EA3C879F187FF6350033D12E /* ofxColorSetAnimated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; path = ofxColorSetAnimated.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		EA3C87A0187FF6350033D12E /* ofxColorSetAnimated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; path = ofxColorSetAnimated.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EA3C87AB187FF6C60033D12E /* ofdTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofdTimer.cpp; sourceTree = "<group>"; };
 		EA3C87AC187FF6C60033D12E /* ofdTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofdTimer.h; sourceTree = "<group>"; };
 		EA3C87AE188004490033D12E /* ofxColorSetUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorSetUI.cpp; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		EA97037D1882C97900692B86 /* ofxConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxConstraint.h; path = ../src/ofxConstraint.h; sourceTree = "<group>"; };
 		EA97037F1882CD4500692B86 /* ofxAttractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxAttractor.cpp; path = ../src/ofxAttractor.cpp; sourceTree = "<group>"; };
 		EACA97CB187DEF2000621353 /* ofxParticleWorldDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofxParticleWorldDefine.h; path = ../../ofxParticleWorld_/src/ofxParticleWorldDefine.h; sourceTree = "<group>"; };
-		F575F38CC7622302A12F0342 /* ofxParticleWorld.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; lineEnding = 0; name = ofxParticleWorld.h; path = ../../../addons/ofxParticleWorld/src/ofxParticleWorld.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F575F38CC7622302A12F0342 /* ofxParticleWorld.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; lineEnding = 0; name = ofxParticleWorld.h; path = ../../../addons/ofxParticleWorld/src/ofxParticleWorld.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

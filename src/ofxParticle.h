@@ -54,5 +54,7 @@ public:
     
     ofColor colorToDraw();
     
+    ofVec3f getPos(){return pos;}
+    ofVec3f getVel(){return vel;}
     
 };

@@ -1,4 +1,5 @@
-#include "ofApp.h"
+
+#include "ofxParticleWorld.h"
 
 //--------------------------------------------------------------
 void ofxParticleWorld::setup(ofxColorSet& _colorSet){
@@ -87,7 +88,7 @@ void ofxParticleWorld::update(){
 }
 
 //--------------------------------------------------------------
-void ofxParticleWorld::drawParticles(){
+void ofxParticleWorld::draw(){
     
     vector<ofxParticle>::iterator   oneParticle;
 
@@ -120,6 +121,10 @@ float ofxParticleWorld::getLife(){
     return m_pxLifeBase * getFpsSaveRate();
 }
 
+//--------------------------------------------------------------
+vector<ofxParticle> ofxParticleWorld::getTrackers(){
+    return m_aParts;
+}
 
 /*
 //--------------------------------------------------------------

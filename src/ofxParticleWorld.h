@@ -16,7 +16,7 @@ public:
     void loadSettings();
     void setAttractors(vector<ofxAttractor> *attract);
     void update();
-    void drawParticles();
+    void draw();
     void clear();
     
     /*
@@ -35,6 +35,9 @@ public:
     vector<ofxAttractor>    *m_pAttractors;
     
     ofxColorSet             *m_pColorSet;
+public:
+    vector<ofxParticle>     getTrackers();
+    
     
 public:
     ofParameterGroup     m_pgSets;

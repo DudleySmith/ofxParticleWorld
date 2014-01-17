@@ -36,5 +36,6 @@ public:
     void incProximityCounter();
     void resetProximityCounter();
     float getProximityRate();
+
     
 };
