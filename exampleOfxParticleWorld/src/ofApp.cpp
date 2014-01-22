@@ -16,7 +16,7 @@ void ofApp::setup(){
     uiParts.add(nbParts.setup("Nb Parts", ""));
     uiParts.add(dist.setup("Distance", ""));
     uiParts.setPosition(10, 100);
-    uiParts.loadFromFile("Settings.xml");
+    uiParts.loadFromFile("Gigi.xml");
     
     // Colors UI --------------------------------------------------------------
     gpColors.add(m_oColorSet.m_oUI.m_gGroup);
@@ -67,7 +67,7 @@ void ofApp::draw(){
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset.", 10, 20);
     
     //--------------------------------------------------------------
-    m_oWorld.drawParticles();
+    m_oWorld.draw();
     for(unsigned int i = 0; i < m_aAttractors.size(); i++){
         m_aAttractors[i].draw();
     }
