@@ -39,7 +39,6 @@ void ofxParticleWorld::loadSettings(){
     m_pgAttractions.add(m_pxCoefForcesMin.set("CoefForcesMin", 0.05, 0, 0.1));
     m_pgAttractions.add(m_pxCoefForces_X.set("CoefForces_X", 0, 0, 1));
     m_pgAttractions.add(m_pxCoefForces_Y.set("CoefForces_Y", 0, 0, 1));
-    m_pgAttractions.add(m_pxPulse.set("Pulse", 0.5, 0, 5));
     m_pgAttractions.add(m_pxDrag.set("Drag", 0.5, 0, 1));
     m_pgAttractions.add(m_pxDistMin.set("DistMin", 40, 0, 250));
     m_pgAttractions.add(m_pxDistMax.set("DistMax", 300, 0, 1000));
