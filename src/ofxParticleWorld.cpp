@@ -17,6 +17,8 @@ void ofxParticleWorld::loadSettings(){
     // Settings ---------------
     m_pgSets.setName("Parts settings");
     
+    m_pgSets.add(m_btPartsOn.set("PartsOn", true));
+    
     m_pgWorld.setName("World");
     m_pgWorld.add(m_pxRenderMode.set("RenderMode", 0, PRENDER_NoRender, PRENDER_OBLIQU));
     m_pgWorld.add(m_pxAttractMode.set("AttractMode", 0, PATTRACTOR_ATTRACT, PATTRACTOR_NOISE));

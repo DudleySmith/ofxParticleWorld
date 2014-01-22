@@ -43,6 +43,8 @@ public:
     ofParameterGroup     m_pgSets;
     
 private:
+    ofParameter<bool>    m_btPartsOn;
+
     ofParameterGroup     m_pgWorld;
     ofParameter<int>     m_pxRenderMode;
     ofParameter<int>     m_pxAttractMode;
