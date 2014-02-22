@@ -32,25 +32,26 @@ public:
     */
     
     vector<ofxParticle>     m_aParts;
+    vector<ofxParticle*>    m_aPartTrackers;
+    
     vector<ofxAttractor>    *m_pAttractors;
-    
     ofxColorSet             *m_pColorSet;
-public:
-    vector<ofxParticle>     getTrackers();
-    
+
     
 public:
     ofParameterGroup     m_pgSets;
     
-private:
-    ofParameter<bool>    m_btPartsOn;
 
+    ofParameter<bool>    m_btPartsOn;
+    
+private:
     ofParameterGroup     m_pgWorld;
     ofParameter<int>     m_pxRenderMode;
     ofParameter<int>     m_pxAttractMode;
     ofParameter<int>     m_pxColorMode;
     ofParameter<float>   m_pxVelMax;
-    ofParameter<int>     m_pxNbPartsMax;
+    ofParameter<int>     m_pxNbPartsMaxPerEmission;
+    ofParameter<int>     m_pxNbPartsMax_;
     ofParameter<int>     m_pxFpsSaveMin;
     ofParameter<int>     m_pxFpsSaveMax;
     ofParameter<float>   m_pxZMax;
@@ -76,13 +77,17 @@ private:
     ofParameter<float>   m_pxPulse;
     ofParameter<float>   m_pxFlowBase;
     ofParameter<float>   m_pxFlowReal;
+    ofParameter<float>   m_pxTrackersRate;
+    ofParameter<int>     m_pxNbTrackersBase;
+    ofParameter<int>     m_pxNbTrackersReal;
     
 public:
     partRenderMode getPxRenderMode(){return m_pxRenderMode.cast<partRenderMode>();}
     partAttractorMode getPxAttractMode(){return m_pxAttractMode.cast<partAttractorMode>();}
     partColorMode getPxColorMode(){return m_pxColorMode.cast<partColorMode>();}
     float getPxVelMax(){return m_pxVelMax.get();}
-    int getPxPartsMax(){return m_pxNbPartsMax.get();}
+    int getPxPartsMaxPerEmission(){return m_pxNbPartsMaxPerEmission.get();}
+    int getPxPartsMax_(){return m_pxNbPartsMax_.get();}
     float getPxFpsSaveMin(){return m_pxFpsSaveMin.get();}
     float getPxFpsSaveMax(){return m_pxFpsSaveMax.get();}
     float getPxZMax(){return m_pxZMax.get();}
@@ -102,13 +107,18 @@ public:
     float getPxMaxProxCounter(){return m_pxMaxProxCounter.get();}
     
     float getPxPulse(){return m_pxPulse.get();}
-//    float getPxFlowBase(){return m_pxFlowBase.get();}
-//    float getPxFlowReal(){return m_pxFlowReal.get();}
+    //    float getPxFlowBase(){return m_pxFlowBase.get();}
+    //    float getPxFlowReal(){return m_pxFlowReal.get();}
+    float getPxTrackersRate(){return m_pxTrackersRate.get();}
+    //int getPxTrackersRate(){return m_pxNbTrackersBase.get();};
+    //int getPxTrackersRate(){return m_pxNbTrackersReal.get();};
     
     // Special acces to life because of FPS saving
 private:
     float getFpsSaveRate();
 public:
-    float getLife();
-    float getFlow();
+    float   getLife();
+    float   getFlow();
+    int     getMaxTrackers();
+    
 };

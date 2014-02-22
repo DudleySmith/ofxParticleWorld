@@ -4,6 +4,9 @@
 ofxParticle::ofxParticle(){
 	m_pAttractPoints = NULL;
     m_pWorld = NULL;
+    
+    m_bIsTracker = false;
+    
 }
 
 ofxParticle::ofxParticle(ofxParticle const &_p){
@@ -19,6 +22,8 @@ ofxParticle::ofxParticle(ofxParticle const &_p){
     
     m_iNumber = _p.m_iNumber;
     
+    m_bIsTracker = _p.m_bIsTracker;
+    
     reset(_p.vel);
     
 }
@@ -29,6 +34,7 @@ ofxParticle::ofxParticle(ofxParticleWorld &_world){
     m_pWorld = &_world;
     m_iNumber = _world.m_aParts.size();
 	m_pAttractPoints = NULL;
+    m_bIsTracker = false;
 }
 
 //------------------------------------------------------------------

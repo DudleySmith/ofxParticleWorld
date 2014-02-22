@@ -39,6 +39,8 @@ private:
     
     ofColor m_oColor;
     
+    bool    m_bIsTracker;
+    
 public:
     void setAttractPoints( vector <ofxAttractor> * attract );
     void setColor(ofColor _color){m_oColor = _color;};
@@ -56,5 +58,9 @@ public:
     
     ofVec3f getPos(){return pos;}
     ofVec3f getVel(){return vel;}
+    
+    bool    isTracker(){    return m_bIsTracker;};
+    void    setAsTracker(){ m_bIsTracker=true;};
+    void    setAsNoTracker(){ m_bIsTracker=false;};
     
 };

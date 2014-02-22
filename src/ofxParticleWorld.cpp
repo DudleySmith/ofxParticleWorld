@@ -24,7 +24,6 @@ void ofxParticleWorld::loadSettings(){
     m_pgWorld.add(m_pxAttractMode.set("AttractMode", 0, PATTRACTOR_ATTRACT, PATTRACTOR_NOISE));
     m_pgWorld.add(m_pxColorMode.set("ColorMode", 0, PCOLOR_MODE_CREATION, PCOLOR_MODE_VEL));
     m_pgWorld.add(m_pxVelMax.set("VelMax", 1, 0, 100));
-    m_pgWorld.add(m_pxNbPartsMax.set("NbPartsMax", 1, 0, 100));
     m_pgWorld.add(m_pxFpsSaveMax.set("FpsMax", 20, 0, 60));
     m_pgWorld.add(m_pxFpsSaveMin.set("FpsMin", 12, 0, 60));
     m_pgWorld.add(m_pxZMax.set("ZMax", 1, 0, 100));
@@ -48,8 +47,13 @@ void ofxParticleWorld::loadSettings(){
     
     m_pgEmissions.setName("Emissions");
     m_pgEmissions.add(m_pxPulse.set("Pulse", 0.5, 0, 1));
+    m_pgEmissions.add(m_pxNbPartsMaxPerEmission.set("PartsMaxPerEmission", 20, 0, 100));
+    m_pgEmissions.add(m_pxNbPartsMax_.set("PartsMax", 1000, 0, 10000));
     m_pgEmissions.add(m_pxFlowBase.set("FlowBase", 40, 0, 200));
     m_pgEmissions.add(m_pxFlowReal.set("FlowReal", 40, 0, 200));
+    m_pgEmissions.add(m_pxTrackersRate.set("TrackersRate", 0.1, 0, 0.25));
+    m_pgEmissions.add(m_pxNbTrackersBase.set("TrackersBase", 20, 0, 500));
+    m_pgEmissions.add(m_pxNbTrackersReal.set("TrackersReal", 20, 0, 500));
 
     m_pgSets.add(m_pgWorld);
     m_pgSets.add(m_pgParts);
@@ -68,6 +72,9 @@ void ofxParticleWorld::update(){
     
     vector<ofxParticle>::iterator   oneParticle;
     
+    // Empty trackers list
+    m_aPartTrackers.clear();
+    
     for(oneParticle = m_aParts.begin(); oneParticle != m_aParts.end(); ++oneParticle){
         
         (*oneParticle).setAttractPoints(m_pAttractors);
@@ -76,6 +83,15 @@ void ofxParticleWorld::update(){
             oneParticle = m_aParts.erase(oneParticle);
         }else{
             (*oneParticle).update();
+            
+            if(oneParticle->isTracker()==true && m_aPartTrackers.size()<getMaxTrackers()){
+                // Fill tracker list --
+                m_aPartTrackers.push_back(&(*oneParticle));
+                //ofLogVerbose() << "This part is a tracker";
+            }else{
+                //ofLogVerbose() << "This part is NOT a tracker";
+            }
+            
         }
         
         if(oneParticle == m_aParts.end())   break;
@@ -85,6 +101,7 @@ void ofxParticleWorld::update(){
     // Update of label for real life used
     m_pxLifeReal = getLife();
     m_pxFlowReal = getFlow();
+    m_pxNbTrackersReal = getMaxTrackers();
     
 }
 
@@ -102,6 +119,7 @@ void ofxParticleWorld::draw(){
 //--------------------------------------------------------------
 void ofxParticleWorld::clear(){
     m_aParts.erase(m_aParts.begin(), m_aParts.end());
+    m_aPartTrackers.erase(m_aPartTrackers.begin(), m_aPartTrackers.end());
 }
 
 //--------------------------------------------------------------
@@ -123,8 +141,8 @@ float ofxParticleWorld::getLife(){
 }
 
 //--------------------------------------------------------------
-vector<ofxParticle> ofxParticleWorld::getTrackers(){
-    return m_aParts;
+int ofxParticleWorld::getMaxTrackers(){
+    return m_pxNbTrackersBase * getFpsSaveRate();
 }
 
 /*

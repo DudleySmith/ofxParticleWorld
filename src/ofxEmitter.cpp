@@ -14,7 +14,7 @@ ofxEmitter::ofxEmitter(){
 
 // -----------------------------------------------------------------------
 ofxEmitter::ofxEmitter(ofxParticleWorld &_world) : ofxConstraint(_world){
-    m_fLastTimeEmit = ofGetElapsedTimeMillis();
+    m_fLastTimeEmit = ofGetElapsedTimeMillis()/1000.0f;
 }
 
 //--------------------------------------------------------------
@@ -24,12 +24,12 @@ ofxEmitter::~ofxEmitter(){
 
 //--------------------------------------------------------------
 ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1) : ofxConstraint(_world, _p1){
-    m_fLastTimeEmit = ofGetElapsedTimeMillis();
+    m_fLastTimeEmit = ofGetElapsedTimeMillis()/1000.0f;
 }
 
 //--------------------------------------------------------------
 ofxEmitter::ofxEmitter(ofxParticleWorld &_world, ofPoint _p1, ofPoint _p2) : ofxConstraint(_world, _p1, _p2){
-    m_fLastTimeEmit = ofGetElapsedTimeMillis();
+    m_fLastTimeEmit = ofGetElapsedTimeMillis()/1000.0f;
 }
 
 // -----------------------------------------------------------------------
@@ -65,9 +65,14 @@ void ofxEmitter::update(){
     
     m_fLastTimeEmit = ofGetElapsedTimeMillis()/1000.0f;
 
-    int   nbParts = dt * m_fFlow;
+    int   nbParts = min((int)(dt * m_fFlow), m_pWorld->getPxPartsMaxPerEmission());
     
-    if (m_bEmit==true && nbParts>0) {
+    // Save the fps
+    if(m_pWorld->m_aParts.size()+nbParts > m_pWorld->getPxPartsMax_()){
+        return;
+    }
+    
+    if (m_bEmit==true && nbParts>0 && m_pWorld->getLife()>0) {
         
         // Preparing the part
         ofVec3f originVel;
@@ -112,8 +117,20 @@ void ofxEmitter::update(){
             partToEmit.reset(originVel);
             partToEmit.setPos(originPos);
             
-            m_pWorld->m_aParts.push_back(partToEmit);
+            // --------------------------------------------------
+            // Here we tag some parts as trackers
+            //float invRate = 1.0f-m_pWorld->getPxTrackersRate();
+            int invertedTrackersRate = max(1, int((1.0f - m_pWorld->getPxTrackersRate()) * nbParts));
             
+            if(nbToEmit%invertedTrackersRate==0){
+                partToEmit.setAsTracker();
+            }else{
+                partToEmit.setAsNoTracker();
+            }
+            
+            // ---------------------------------------------------
+            m_pWorld->m_aParts.push_back(partToEmit);
+
         }
         
     }
